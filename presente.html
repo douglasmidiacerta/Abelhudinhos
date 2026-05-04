@@ -143,12 +143,10 @@
     ============================= */
     #s4{background:radial-gradient(ellipse at center,#06062a 0%,#020210 100%)}
     .star-map-wrap{display:flex;flex-direction:column;align-items:center}
-    .star-circle{width:220px;height:220px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.15);position:relative;overflow:hidden;
-      background:radial-gradient(ellipse,#0a0a30,#020210)}
-    .star-quote{color:#fff;font-size:14px;font-style:italic;text-align:center;
-      max-width:300px;line-height:1.6;margin:16px 0 8px}
-    .star-coords{color:rgba(255,255,255,.35);font-size:11px;text-align:center;letter-spacing:.5px}
+    .star-quote{color:#fff;font-size:16px;font-style:italic;text-align:center;
+      max-width:300px;line-height:1.6;margin:16px 0 8px; font-weight:700; text-shadow: 0 2px 4px rgba(0,0,0,0.8)}
+    .star-coords{color:rgba(255,255,255,.5);font-size:11px;text-align:center;letter-spacing:.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.8)}
+
 
     /* ============================
        SLIDE 5 — WORD GAME
@@ -205,8 +203,8 @@
     #s7{background:#0d0d0d}
     .spin-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
     .spin-title-h{color:#fff;font-size:18px;font-weight:800;text-align:center;line-height:1.3;margin-bottom:4px}
-    .wheel-container{position:relative;width:220px;height:220px}
-    #wheel-canvas{border-radius:50%;box-shadow:0 0 30px rgba(124,58,237,.3)}
+    .wheel-container{position:relative;width:300px;height:300px;max-width:90vw;max-height:90vw}
+    #wheel-canvas{border-radius:50%;box-shadow:0 0 30px rgba(124,58,237,.3);width:100%;height:100%}
     .wheel-arrow{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
       font-size:24px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
     .wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -305,22 +303,17 @@
       100%{transform:translateY(110vh) rotate(720deg);opacity:.3}
     }
 
-    /* ===== IG FEED ===== */
-    .ig-feed { width: 100%; height: 100%; overflow-y: auto; padding-bottom: 60px; pointer-events: auto; }
-    .ig-feed::-webkit-scrollbar { display: none; }
-    .ig-post { background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
-    .ig-header { display: flex; align-items: center; padding: 10px 12px; }
-    .ig-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--p); padding: 2px; }
-    .ig-user { margin-left: 10px; flex: 1; }
-    .ig-name { color: #fff; font-size: 13px; font-weight: 700; }
-    .ig-loc { color: rgba(255,255,255,.5); font-size: 11px; }
-    .ig-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
-    .ig-actions { padding: 12px 12px 6px; display: flex; gap: 12px; }
-    .ig-actions i { color: #fff; width: 22px; height: 22px; cursor: pointer; transition: .2s; }
-    .ig-actions i.liked { color: #EC4899; fill: #EC4899; }
-    .ig-likes { padding: 0 12px; color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .ig-caption { padding: 0 12px 12px; color: rgba(255,255,255,.85); font-size: 13px; line-height: 1.4; }
-    .ig-caption b { color: #fff; font-weight: 700; }
+    /* ===== TINDER GALLERY ===== */
+    .tinder-gallery { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; pointer-events: auto; }
+    .tinder-gallery::-webkit-scrollbar { display: none; }
+    .tinder-card-wrap { min-width: 100%; height: 100%; position: relative; scroll-snap-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .tinder-bg { position: absolute; inset: -10%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.4); z-index: 1; }
+    .tinder-content { position: relative; z-index: 2; width: 90%; max-width: 360px; display: flex; flex-direction: column; align-items: center; padding-bottom: 40px; }
+    .tinder-header { text-align: center; margin-bottom: 20px; }
+    .tinder-title { color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+    .tinder-desc { color: rgba(255,255,255,.85); font-size: 14px; line-height: 1.5; text-align: center; }
+    .tinder-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,0.1); }
+    .swipe-hint { position: absolute; bottom: 90px; color: rgba(255,255,255,.6); font-size: 13px; font-weight: 600; z-index: 2; display: flex; align-items: center; gap: 8px; animation: pulse 2s infinite; }
     
     /* ===== FUNIL DE CONEXÃO ===== */
     .about-scroll::-webkit-scrollbar { width: 4px; }
@@ -399,16 +392,12 @@
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
-  <!-- SLIDE 2: PHOTO GALLERY (IG FEED) -->
-  <div class="slide" id="s2">
-    <div class="gallery-header" style="margin-bottom:12px">
-      <h2>Nossa Galeria <i data-lucide="instagram" style="display:inline-block;vertical-align:-4px"></i></h2>
-    </div>
-    <div class="ig-feed" id="ig-feed">
+  <!-- SLIDE 2: PHOTO GALLERY (TINDER) -->
+  <div class="slide" id="s2" style="padding:0">
+    <div class="tinder-gallery" id="tinder-gallery">
       <!-- Preenchido via JS -->
     </div>
-    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
-    <div class="watermark">abelhudinhos.com.br — Privado</div>
+    <button class="next-btn" onclick="nextSlide()" style="z-index:10; background:rgba(0,0,0,0.4)">Próxima Seção →</button>
   </div>
 
   <!-- SLIDE 3: TIMELINE -->
@@ -422,17 +411,20 @@
   </div>
 
   <!-- SLIDE 4: STAR MAP -->
-  <div class="slide" id="s4">
-    <div class="star-map-wrap">
-      <div class="label">Mapa das Estrelas</div>
-      <div class="star-circle" id="star-map-circle">
-        <svg id="star-svg" width="220" height="220" viewBox="0 0 220 220" style="display:block"></svg>
-      </div>
-      <div class="star-quote">"O céu quando nossos mundos se colidiram 💫"</div>
-      <div class="star-coords">JUATUBA, MG, BRASIL<br>29 DE NOVEMBRO DE 2025<br>19.9591°S 44.3279°W</div>
+  <div class="slide" id="s4" style="padding:0; justify-content:center">
+    <div class="stars-fullscreen" id="stars-fullscreen" style="position:absolute; inset:0; z-index:1; overflow:hidden">
+       <svg id="star-svg" width="100%" height="100%" style="display:block; position:absolute; inset:0"></svg>
     </div>
-    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
-    <div class="watermark">abelhudinhos.com.br — Privado</div>
+    
+    <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; justify-content:space-between; padding: 40px 20px 80px; pointer-events:none">
+       <div style="font-family:'Georgia', serif; font-size:32px; font-style:italic; color:#fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8)">Edu e Ana</div>
+       
+       <div style="text-align:center; margin-bottom: 20px">
+         <div class="star-quote">"O céu quando nossos mundos se colidiram 🌌<br>🤍"</div>
+         <div class="star-coords">PIRES DO RIO, GO, BRASIL<br>30 DE DEZEMBRO DE 2020 - 22:00<br>17.3492°S 48.3935°W</div>
+       </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()" style="z-index:10; background:rgba(255,255,255,0.2)">Próxima Seção →</button>
   </div>
 
   <!-- SLIDE 5: WORD GAME -->
@@ -467,7 +459,7 @@
       <div class="spin-title-h">Para onde vamos<br>sair Hoje? <i data-lucide="compass" style="display:inline-block;vertical-align:-4px"></i></div>
       <div class="wheel-container">
         <div class="wheel-arrow">▼</div>
-        <canvas id="wheel-canvas" width="220" height="220"></canvas>
+        <canvas id="wheel-canvas" width="300" height="300"></canvas>
         <div class="wheel-center"><i data-lucide="heart" style="color:var(--pk);fill:var(--pk);width:16px;height:16px"></i></div>
       </div>
       <div class="spin-result" id="spin-result"></div>
@@ -478,15 +470,47 @@
   </div>
 
   <!-- SLIDE 8: MUSIC PLAYLIST -->
-  <div class="slide" id="s_music">
-    <div class="label">Nossa Trilha Sonora</div>
-    <div class="big-title" style="font-size:22px;margin-bottom:4px">Músicas Favoritas <i data-lucide="music" style="display:inline-block;vertical-align:-2px"></i></div>
-    <p class="subtitle" style="margin-bottom:8px">As canções que embalam a nossa história.</p>
-    <div class="playlist-wrap" id="playlist-wrap">
-      <!-- JS vai preencher -->
+  <div class="slide" id="s_music" style="padding:0; background: linear-gradient(180deg, #5c0a18 0%, #26040a 100%); justify-content: flex-start;">
+    <div style="width:100%; padding: 24px 20px; display:flex; justify-content:space-between; align-items:center; z-index:2">
+      <i data-lucide="chevron-down" style="color:#fff; width:28px; height:28px"></i>
+      <span style="color:#fff; font-size:13px; font-weight:700">Eu te amo mais que tudo! 💖🥺</span>
+      <i data-lucide="more-horizontal" style="color:#fff; width:28px; height:28px"></i>
     </div>
-    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
-    <div class="watermark">abelhudinhos.com.br — Privado</div>
+    
+    <div style="width:100%; max-width:340px; margin:0 auto; padding: 0 20px; display:flex; flex-direction:column; z-index:2; flex:1; justify-content:center; padding-bottom: 80px">
+      <img src="https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:8px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); margin-bottom:36px" id="sp-cover">
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px">
+        <div>
+          <div style="color:#fff; font-size:22px; font-weight:800; margin-bottom:4px" id="sp-title">Flor e O Beija-Flor</div>
+          <div style="color:rgba(255,255,255,0.7); font-size:15px" id="sp-artist">Henrique e Juliano</div>
+        </div>
+        <div style="width:24px; height:24px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center"><i data-lucide="check" style="color:#000; width:16px; height:16px"></i></div>
+      </div>
+      
+      <div style="width:100%; height:4px; background:rgba(255,255,255,0.3); border-radius:2px; margin-bottom:10px; position:relative">
+        <div style="position:absolute; left:0; top:0; height:100%; width:0%; background:#fff; border-radius:2px" id="sp-prog-fill"></div>
+        <div style="position:absolute; left:0%; top:50%; transform:translate(-50%,-50%); width:12px; height:12px; background:#fff; border-radius:50%" id="sp-prog-thumb"></div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; color:rgba(255,255,255,0.6); font-size:12px; margin-bottom:28px">
+        <span id="sp-time-cur">0:00</span>
+        <span id="sp-time-rem">-3:26</span>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <i data-lucide="shuffle" style="color:rgba(255,255,255,0.8); width:24px"></i>
+        <i data-lucide="skip-back" style="color:#fff; width:36px; height:36px; fill:#fff"></i>
+        <div style="width:64px; height:64px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; pointer-events:auto; z-index:20" onclick="toggleSpPlay()">
+          <i data-lucide="play" id="sp-play-icon" style="color:#000; fill:#000; width:28px; height:28px; margin-left:4px"></i>
+        </div>
+        <i data-lucide="skip-forward" style="color:#fff; width:36px; height:36px; fill:#fff"></i>
+        <i data-lucide="repeat" style="color:rgba(255,255,255,0.8); width:24px"></i>
+      </div>
+    </div>
+    
+    <div style="position:absolute; bottom:30px; left:20px; color:#fff; font-size:16px; font-weight:700">Sobre o casal</div>
+    <button class="next-btn" onclick="nextSlide()" style="z-index:10; background:rgba(0,0,0,0.4)">Próxima Seção →</button>
   </div>
 
   <!-- SLIDE 8: O QUE UM DEVE SABER -->
@@ -852,25 +876,23 @@ var igPhotos = [
   {src:'https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400', caption:'Momentos lindos 💫', loc:'Viagem'},
   {src:'https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400', caption:'Com você 💜', loc:'Noite Especial'}
 ];
-function initIgFeed() {
-  var feed = document.getElementById('ig-feed');
+function initTinderGallery() {
+  var feed = document.getElementById('tinder-gallery');
   if(!feed || feed.children.length > 0) return;
   var html = '';
   igPhotos.forEach(function(p, i) {
-    html += '<div class="ig-post">' +
-      '<div class="ig-header">' +
-        '<img src="https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400" class="ig-avatar">' +
-        '<div class="ig-user"><div class="ig-name">abelhudinhos</div><div class="ig-loc">'+p.loc+'</div></div>' +
-        '<i data-lucide="more-horizontal" style="color:#fff"></i>' +
+    var title = i === 0 ? 'Saudades de momentos 🥺' : 'Nossas Memórias 🤍';
+    var desc = i === 0 ? 'Muitos momentos bons que queríamos que fossem eternos infelizmente passam, e nos restam só as lembranças 🤍' : p.caption;
+    html += '<div class="tinder-card-wrap">' +
+      '<div class="tinder-bg" style="background-image:url('+p.src+')"></div>' +
+      '<div class="tinder-content">' +
+        '<div class="tinder-header">' +
+          '<div class="tinder-title">'+title+'</div>' +
+          '<div class="tinder-desc">'+desc+'</div>' +
+        '</div>' +
+        '<img class="tinder-img" src="'+p.src+'" loading="lazy">' +
       '</div>' +
-      '<img class="ig-img" src="'+p.src+'" loading="lazy">' +
-      '<div class="ig-actions">' +
-        '<i data-lucide="heart" class="liked"></i>' +
-        '<i data-lucide="message-circle"></i>' +
-        '<i data-lucide="send"></i>' +
-      '</div>' +
-      '<div class="ig-likes">Curtido por você e milhares de pessoas</div>' +
-      '<div class="ig-caption"><b>abelhudinhos</b> '+p.caption+'</div>' +
+      (i === 0 ? '<div class="swipe-hint"><i data-lucide="arrow-left" style="width:16px"></i> Arraste para o lado <i data-lucide="arrow-right" style="width:16px"></i></div>' : '') +
     '</div>';
   });
   feed.innerHTML = html;
@@ -878,7 +900,7 @@ function initIgFeed() {
 }
 
 function onSlideEnter(n) {
-  if (n === 2) { initIgFeed(); }
+  if (n === 2) { initTinderGallery(); }
   if (n === 1 && !muted && !audioStarted) {
     audioStarted = true;
     document.getElementById('bgm').play().catch(function(){});
@@ -974,52 +996,58 @@ function initTimeline() {
 function initStarMap() {
   var svg = document.getElementById('star-svg');
   if (svg.children.length > 0) return;
-  var W = 220, H = 220, CX = 110, CY = 110, R = 105;
+  var W = window.innerWidth, H = window.innerHeight;
+  var CX = W/2, CY = H/2 - 40;
+  
   var html = '';
   // Background gradient
   html += `<defs>
-    <radialGradient id="smg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0d1240"/>
-      <stop offset="100%" stop-color="#020210"/>
+    <radialGradient id="smg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0a2a"/>
+      <stop offset="100%" stop-color="#020208"/>
     </radialGradient>
-    <clipPath id="smclip"><circle cx="${CX}" cy="${CY}" r="${R}"/></clipPath>
   </defs>`;
-  html += `<circle cx="${CX}" cy="${CY}" r="${R}" fill="url(#smg)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>`;
+  html += `<rect width="100%" height="100%" fill="url(#smg)"/>`;
+  
   // Stars
   var seed = 42;
   function rand() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
-  for (var i = 0; i < 120; i++) {
-    var angle = rand() * Math.PI * 2;
-    var dist = Math.sqrt(rand()) * R * 0.95;
-    var x = CX + dist * Math.cos(angle);
-    var y = CY + dist * Math.sin(angle);
-    var r = rand() * 1.4 + 0.3;
+  for (var i = 0; i < 200; i++) {
+    var x = rand() * W;
+    var y = rand() * H;
+    var r = rand() * 1.5 + 0.3;
     var op = rand() * 0.7 + 0.3;
-    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="white" opacity="${op.toFixed(2)}" clip-path="url(#smclip)"/>`;
+    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="white" opacity="${op.toFixed(2)}"/>`;
   }
-  // Constellation — Big Dipper style
+  
+  // Constellation
   var pts = [
-    [80,75],[95,68],[112,72],[128,68],
-    [130,85],[118,94],[102,90]
+    [CX-80, CY-20], [CX-30, CY-40], [CX+20, CY-20], [CX+70, CY-30], [CX+110, CY+10], [CX+130, CY+50],
+    [CX-40, CY+50], [CX-10, CY+90], [CX-70, CY+100], [CX-80, CY+60], [CX-40, CY+50]
   ];
+  
+  // Draw lines with animation
+  var linesHtml = '';
   for (var j = 0; j < pts.length - 1; j++) {
-    html += `<line x1="${pts[j][0]}" y1="${pts[j][1]}" x2="${pts[j+1][0]}" y2="${pts[j+1][1]}" stroke="rgba(159,103,255,0.6)" stroke-width="1" clip-path="url(#smclip)"/>`;
+    if (j === 5) continue; // Skip line connecting the two separate constellation parts
+    var length = Math.hypot(pts[j+1][0] - pts[j][0], pts[j+1][1] - pts[j][1]);
+    linesHtml += `<line x1="${pts[j][0]}" y1="${pts[j][1]}" x2="${pts[j+1][0]}" y2="${pts[j+1][1]}" stroke="rgba(255,255,255,0.6)" stroke-width="1" stroke-dasharray="${length}" stroke-dashoffset="${length}">
+      <animate attributeName="stroke-dashoffset" from="${length}" to="0" dur="1s" begin="${(j>5?j-1:j) * 0.2}s" fill="freeze" />
+    </line>`;
   }
-  pts.forEach(function(p) {
-    html += `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#9F67FF" clip-path="url(#smclip)"/>`;
-    html += `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="rgba(159,103,255,0.2)" clip-path="url(#smclip)"/>`;
+  html += linesHtml;
+  
+  // Draw points
+  pts.forEach(function(p, i) {
+    var delay = (i>5?i-1:i) * 0.2;
+    html += `<circle cx="${p[0]}" cy="${p[1]}" r="0" fill="#fff">
+      <animate attributeName="r" from="0" to="2.5" dur="0.5s" begin="${delay}s" fill="freeze" />
+    </circle>`;
+    html += `<circle cx="${p[0]}" cy="${p[1]}" r="0" fill="rgba(255,255,255,0.2)">
+      <animate attributeName="r" from="0" to="8" dur="0.5s" begin="${delay}s" fill="freeze" />
+    </circle>`;
   });
-  // Secondary constellation
-  var pts2 = [[150,120],[162,108],[175,115],[170,130],[155,135]];
-  for (var k = 0; k < pts2.length - 1; k++) {
-    html += `<line x1="${pts2[k][0]}" y1="${pts2[k][1]}" x2="${pts2[k+1][0]}" y2="${pts2[k+1][1]}" stroke="rgba(236,72,153,0.5)" stroke-width="0.8" clip-path="url(#smclip)"/>`;
-  }
-  pts2.forEach(function(p) {
-    html += `<circle cx="${p[0]}" cy="${p[1]}" r="2" fill="#EC4899" clip-path="url(#smclip)"/>`;
-  });
-  // Cross marker in center
-  html += `<line x1="${CX-8}" y1="${CY}" x2="${CX+8}" y2="${CY}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
-  html += `<line x1="${CX}" y1="${CY-8}" x2="${CX}" y2="${CY+8}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
+  
   svg.innerHTML = html;
 }
 
@@ -1267,7 +1295,7 @@ function initSpinWheel() {
 function drawWheel(angle) {
   var canvas = document.getElementById('wheel-canvas');
   var ctx = canvas.getContext('2d');
-  var W = 220, H = 220, CX = 110, CY = 110, R = 106;
+  var W = 300, H = 300, CX = 150, CY = 150, R = 146;
   var opts = CONFIG.spinOptions;
   var slice = (Math.PI * 2) / opts.length;
   var colors = ['#f472b6','#e879f9','#c084fc','#a78bfa','#f9a8d4','#fb7185','#fdba74','#a5f3fc'];
@@ -1292,10 +1320,10 @@ function drawWheel(angle) {
     ctx.rotate(start + slice / 2);
     ctx.textAlign = 'right';
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 10px Inter, sans-serif';
+    ctx.font = 'bold 12px Inter, sans-serif';
     ctx.shadowColor = 'rgba(0,0,0,0.5)';
     ctx.shadowBlur = 3;
-    ctx.fillText(opt, R - 6, 4);
+    ctx.fillText(opt, R - 10, 4);
     ctx.restore();
   });
   // Center circle
@@ -1344,14 +1372,54 @@ function spinWheel() {
   requestAnimationFrame(animate);
 }
 
-// ===== MUSIC PLAYLIST =====
+// ===== MUSIC PLAYLIST (SPOTIFY PLAYER) =====
+function toggleSpPlay() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('sp-play-icon');
+  if (audio.paused) {
+    audio.play();
+    icon.setAttribute('data-lucide', 'pause');
+    icon.style.marginLeft = '0';
+    muted = false;
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-2" style="width:16px"></i>';
+  } else {
+    audio.pause();
+    icon.setAttribute('data-lucide', 'play');
+    icon.style.marginLeft = '4px';
+    muted = true;
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-x" style="width:16px"></i>';
+  }
+  lucide.createIcons();
+}
+
+setInterval(function() {
+  var audio = document.getElementById('bgm');
+  // Update progress if we are in music slide
+  if(cur === 8 && !audio.paused) {
+    var pct = (audio.currentTime / audio.duration) * 100 || 0;
+    document.getElementById('sp-prog-fill').style.width = pct + '%';
+    document.getElementById('sp-prog-thumb').style.left = pct + '%';
+    
+    var curM = Math.floor(audio.currentTime / 60);
+    var curS = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+    document.getElementById('sp-time-cur').textContent = curM + ':' + curS;
+    
+    var remT = audio.duration - audio.currentTime || 0;
+    var remM = Math.floor(remT / 60);
+    var remS = Math.floor(remT % 60).toString().padStart(2, '0');
+    document.getElementById('sp-time-rem').textContent = '-' + remM + ':' + remS;
+    
+    var icon = document.getElementById('sp-play-icon');
+    if(icon.getAttribute('data-lucide') === 'play') {
+       icon.setAttribute('data-lucide', 'pause');
+       icon.style.marginLeft = '0';
+       lucide.createIcons();
+    }
+  }
+}, 500);
+
 function initMusic() {
-  var wrap = document.getElementById('playlist-wrap');
-  if (wrap.children.length > 0) return;
-  
-  CONFIG.favoriteSongs.forEach(function(song) {
-    wrap.innerHTML += '<iframe style="border-radius:12px;margin-bottom:12px" src="https://open.spotify.com/embed/track/' + song.trackId + '?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
-  });
+  // Empty, using custom player with bgm now
 }
 
 // ===== ACHIEVEMENTS =====

@@ -1,5 +1,13 @@
 # Changelog - Abelhudinhos
 
+## [1.6.0] - 2026-05-04
+
+### Adicionado / Modificado
+- **Galeria Tinder-style**: O feed do Instagram foi substituído por cards em tela cheia com arraste lateral (scroll-snap), trazendo uma experiência mais imersiva e parecida com o Tinder/Stories.
+- **Player de Música Customizado**: Os iframes pequenos do Spotify foram substituídos por um player nativo em tela cheia, controlando o áudio de fundo com barra de progresso, botões de play/pause e design similar ao Spotify.
+- **Mapa das Estrelas**: A exibição agora é tela inteira. Adicionada uma animação em SVG que desenha as conexões da constelação ao abrir o slide.
+- **Roleta Surpresa**: O tamanho do componente na tela foi ampliado de 220px para 300px, melhorando a visibilidade e toque em dispositivos móveis.
+
 ## [1.5.0] - 2026-05-04
 
 ### Adicionado

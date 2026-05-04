@@ -23,3 +23,7 @@
 ## Interatividade do Mapa Leaflet
 - **Problema**: O mapa no slide "Jornada" não possuía zoom ou interação, parecendo estático e irritando o usuário.
 - **Solução**: Ao configurar a instância do `L.map`, não forçar opções como `zoomControl: false`, `scrollWheelZoom: false` ou `dragging: false` caso se espere que o usuário tenha interação com a visualização espacial do mapa.
+
+## Player de Áudio Customizado vs IFrames (Spotify)
+- **Problema**: O usuário deseja um visual idêntico ao aplicativo do Spotify para as músicas em tela cheia, porém IFrames incorporados não permitem estilização total e controle preciso via JS.
+- **Solução**: Remover os IFrames e construir um player de áudio HTML/CSS nativo, controlando a tag `<audio id="bgm">` existente na página através de JavaScript. Isso permite replicar qualquer visual nativo e sincronizar botões de play/pause perfeitamente.
