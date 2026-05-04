@@ -948,11 +948,7 @@ function initRealMap() {
   if (_mapInited) return;
   _mapInited = true;
 
-  var LAT = -19.959134, LNG = -44.327881;
-
   var map = L.map('real-map', {
-    center: [LAT, LNG],
-    zoom: 15,
     zoomControl: false,
     attributionControl: false,
     dragging: true,
@@ -960,38 +956,67 @@ function initRealMap() {
     doubleClickZoom: false,
   });
 
-  // Dark tile layer (CartoDB Dark Matter)
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19,
-    subdomains: 'abcd',
+    maxZoom: 19, subdomains: 'abcd',
   }).addTo(map);
 
-  // Custom heart marker
-  function heartMarker(emoji, size) {
+  // Todos os lugares da nossa jornada (extraídos do GPS das fotos)
+  var lugares = [
+    {lat:-19.959134, lon:-44.327881, date:"29 Nov 2025", city:"Juatuba, MG",       emoji:"💚", label:"Nos conhecemos aqui 💚", fotos:0,  id:""},
+    {lat:-19.944165, lon:-44.01462,  date:"26 Dez 2025", city:"Belo Horizonte, MG", emoji:"💜", label:"Passeio em BH",         fotos:4,  id:"10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5"},
+    {lat:-19.958201, lon:-43.997714, date:"01 Fev 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"Momento especial em BH", fotos:1,  id:"1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK"},
+    {lat:-18.354406, lon:-43.73595,  date:"16 Fev 2026", city:"Diamantina, MG",     emoji:"🌟", label:"Viagem a Diamantina",   fotos:1,  id:"19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y"},
+    {lat:-19.880043, lon:-43.928381, date:"07 Mar 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"De volta a BH",         fotos:4,  id:"1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex"},
+    {lat:-20.011608, lon:-44.044957, date:"08 Mar 2026", city:"Ibirité, MG",        emoji:"💜", label:"Ibirité",               fotos:1,  id:"1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR"},
+    {lat:-18.349053, lon:-43.744531, date:"04 Abr 2026", city:"Gouveia, MG",        emoji:"🌟", label:"Viagem a Gouveia",      fotos:3,  id:"1ljMWyKgeLYLHFEeYp7uCRsv8YMu2RUur"},
+    {lat:-20.388459, lon:-43.506573, date:"02 Mai 2026", city:"Ouro Preto, MG",     emoji:"🌟", label:"Ouro Preto!",           fotos:8,  id:"1BVLv-g92CjoUYpVCZtVaAWMTNNoyBeMI"},
+  ];
+
+  function mkIcon(emoji, size) {
     return L.divIcon({
-      html: '<div style="font-size:' + size + 'px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))">' + emoji + '</div>',
-      iconSize: [size, size],
-      iconAnchor: [size / 2, size],
-      popupAnchor: [0, -size],
-      className: '',
+      html: '<div style="font-size:'+size+'px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))">' + emoji + '</div>',
+      iconSize:[size,size], iconAnchor:[size/2,size], popupAnchor:[0,-size], className:'',
     });
   }
 
-  // Main pin — onde se conheceram
-  L.marker([LAT, LNG], {icon: heartMarker('💚', 32)})
-    .addTo(map)
-    .bindPopup('<b style="font-size:13px">Nos conhecemos aqui 💚</b><br><span style="font-size:11px;color:#666">29 de novembro de 2025<br>Juatuba, MG</span>', {maxWidth: 180})
-    .openPopup();
+  var markerList = [], latlngs = [];
 
-  // Legenda
-  var legend = L.control({position: 'bottomright'});
-  legend.onAdd = function() {
-    var d = L.DomUtil.create('div');
-    d.style.cssText = 'background:rgba(0,0,0,.65);color:#fff;padding:6px 10px;border-radius:8px;font-size:11px;backdrop-filter:blur(4px)';
-    d.innerHTML = '💚 Onde nos conhecemos';
-    return d;
-  };
-  legend.addTo(map);
+  lugares.forEach(function(loc) {
+    var size = loc.fotos >= 4 ? 30 : loc.fotos === 0 ? 32 : 26;
+    var pop = '<div style="font-size:11px;min-width:130px;font-family:Inter,sans-serif">';
+    if (loc.id) {
+      pop += '<img src="https://lh3.googleusercontent.com/d/'+loc.id+'=w200" '
+           + 'style="width:130px;height:90px;object-fit:cover;border-radius:6px;display:block;margin-bottom:6px" '
+           + 'onerror="this.style.display=\'none\'">';
+    }
+    pop += '<b style="font-size:12px">'+loc.city+'</b><br>';
+    pop += '<span style="color:#888">'+loc.date;
+    if (loc.fotos > 0) pop += ' · '+loc.fotos+' foto'+(loc.fotos>1?'s':'');
+    pop += '</span></div>';
+
+    var m = L.marker([loc.lat, loc.lon], {icon: mkIcon(loc.emoji, size)})
+      .addTo(map)
+      .bindPopup(pop, {maxWidth:150, className:'dark-popup'});
+    markerList.push(m);
+    latlngs.push([loc.lat, loc.lon]);
+  });
+
+  // Linha conectando a jornada em ordem cronológica
+  L.polyline(latlngs, {
+    color:'rgba(159,103,255,0.55)', weight:1.8, dashArray:'6,5',
+  }).addTo(map);
+
+  // Ajusta zoom para mostrar todos os marcadores
+  var group = L.featureGroup(markerList);
+  map.fitBounds(group.getBounds().pad(0.18));
+
+  // Abre popup do primeiro marcador
+  setTimeout(function(){ markerList[0].openPopup(); }, 400);
+
+  // Estilo do popup
+  var style = document.createElement('style');
+  style.textContent = '.dark-popup .leaflet-popup-content-wrapper{background:rgba(15,15,30,.92);color:#fff;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 20px rgba(0,0,0,.5)}.dark-popup .leaflet-popup-tip{background:rgba(15,15,30,.92)}.dark-popup .leaflet-popup-close-button{color:rgba(255,255,255,.5)}';
+  document.head.appendChild(style);
 }
 
 // ===== SPIN WHEEL =====
