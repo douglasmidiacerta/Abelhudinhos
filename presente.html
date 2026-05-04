@@ -285,6 +285,9 @@
 </head>
 <body>
 
+<!-- Áudio de Fundo -->
+<audio id="bgm" loop preload="auto" src="https://assets.mixkit.co/music/preview/mixkit-romantic-piano-122.mp3"></audio>
+
 <!-- Progress bar -->
 <div id="prog-bar"></div>
 
@@ -611,8 +614,8 @@ function startProgress() {
     updateProgBar();
     if (progressElapsed >= SLIDE_DURATION) {
       stopProgress();
-      // Auto-advance only for non-interactive slides
-      if (cur !== 5 && cur !== 7) nextSlide();
+      // Auto-advance only for non-interactive slides (2=Gallery, 5=WordGame, 6=Map, 7=Wheel)
+      if (cur !== 2 && cur !== 5 && cur !== 6 && cur !== 7) nextSlide();
     }
   }, TICK);
 }
@@ -630,6 +633,11 @@ function goSlide(n) {
   updateTopBar();
   startProgress();
   onSlideEnter(cur);
+  
+  // Disable nav zones on interactive slides to allow internal clicks
+  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7);
+  document.getElementById('nav-left').style.pointerEvents = isInteractive ? 'none' : 'auto';
+  document.getElementById('nav-right').style.pointerEvents = isInteractive ? 'none' : 'auto';
 }
 
 function nextSlide() { if (cur < TOTAL - 1) goSlide(cur + 1); }
@@ -644,13 +652,25 @@ function updateTopBar() {
   document.getElementById('slide-title').textContent = titles[cur] || 'Abelhudinhos';
 }
 
+var audioStarted = false;
 function toggleSound() {
   muted = !muted;
-  document.getElementById('sound-btn').textContent = muted ? '🔇' : '🔊';
+  var audio = document.getElementById('bgm');
+  if (muted) {
+    audio.pause();
+    document.getElementById('sound-btn').textContent = '🔇';
+  } else {
+    audio.play().catch(function(){});
+    document.getElementById('sound-btn').textContent = '🔊';
+  }
 }
 
 // ===== SLIDE ENTER ACTIONS =====
 function onSlideEnter(n) {
+  if (n === 1 && !muted && !audioStarted) {
+    audioStarted = true;
+    document.getElementById('bgm').play().catch(function(){});
+  }
   if (n === 0) initCover();
   if (n === 1) initUniverse();
   if (n === 3) initTimeline();
@@ -802,7 +822,7 @@ var wgKeyStatus = {};
 
 function initWordGame() {
   wgInitialized = true;
-  wgWord = CONFIG.secretWord.toUpperCase();
+  wgWord = CONFIG.secretWord.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   document.getElementById('wg-heading').textContent = CONFIG.wordDescription;
   document.getElementById('wg-hint').textContent = CONFIG.wordHint;
   renderWGGrid();
@@ -1095,12 +1115,11 @@ function spinWheel() {
     } else {
       spinning = false;
       document.getElementById('spin-btn').disabled = false;
-      // Determine result: arrow points up (angle = -PI/2 from top)
-      var normalAngle = ((spinAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+      // Determine result: arrow points up
+      var normalAngle = spinAngle % (Math.PI * 2);
       var slice = (Math.PI * 2) / CONFIG.spinOptions.length;
-      // Arrow at top = -PI/2, convert to which slice
-      var arrowAngle = (Math.PI / 2 - normalAngle + Math.PI * 4) % (Math.PI * 2);
-      var idx = Math.floor(arrowAngle / slice) % CONFIG.spinOptions.length;
+      var effectiveAngle = (-normalAngle + Math.PI * 20) % (Math.PI * 2);
+      var idx = Math.floor(effectiveAngle / slice) % CONFIG.spinOptions.length;
       var chosen = CONFIG.spinOptions[idx];
       document.getElementById('spin-result').textContent = '🎯 ' + chosen + '!';
       document.getElementById('spin-next').style.display = 'block';
