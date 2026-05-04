@@ -1,5 +1,15 @@
 # Changelog - Abelhudinhos
 
+## [1.2.0] - 2026-05-03
+
+### Adicionado
+- **Nova Seção de Músicas Favoritas**: Criada uma aba no `presente.html` dedicada a listar faixas musicais do casal com um visual moderno que remete a playlists do Spotify (Capa, Título, Artista e botão de play).
+- **Biblioteca Lucide Icons**: Todos os emojis de layout estrutural (Landing Page e Presente) foram substituídos por ícones vetorizados escaláveis nativos (`<i data-lucide="...">`).
+
+### Corrigido e Melhorado
+- **Jogo de Palavras (Correção Crítica)**: Corrigida falha silenciosa que não renderizava a grade e teclado devido à ausência do ID `wg-hint` no DOM do HTML.
+- **UX (Navegação):** Botões "Próxima Seção" nos slides interativos (Roleta e Jogo de Palavras) agora permanecem visíveis o tempo todo, permitindo que o usuário avance independentemente de ter completado a interação.
+
 ## [1.1.0] - 2026-05-03
 
 ### Corrigido (presente.html)

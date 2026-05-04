@@ -6,12 +6,14 @@
   <title>Abelhudinhos — Para Você, com Todo Meu Amor 💜</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     :root{--p:#7C3AED;--pk:#EC4899;--gold:#F59E0B;--green:#10B981}
     html,body{height:100%;overflow:hidden;background:#0d0d1a;font-family:'Inter',sans-serif}
+    .lucide { width: 1em; height: 1em; stroke-width: 2; vertical-align: -0.125em; }
 
     /* ===== STORIES PROGRESS BAR ===== */
     #prog-bar{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -211,7 +213,20 @@
       min-height:24px;transition:.3s}
 
     /* ============================
-       SLIDE 8 — MOON
+       SLIDE 8 — MUSIC PLAYLIST
+    ============================= */
+    #s_music{background:linear-gradient(to bottom, #1a0a33 0%, #0d0d0d 100%)}
+    .playlist-wrap{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-top:16px}
+    .track-card{display:flex;align-items:center;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 14px;gap:12px;transition:background .2s}
+    .track-card:hover{background:rgba(255,255,255,.1)}
+    .track-cover{width:48px;height:48px;border-radius:6px;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+    .track-info{flex:1;display:flex;flex-direction:column;justify-content:center}
+    .track-title{color:#fff;font-size:14px;font-weight:700;margin-bottom:2px}
+    .track-artist{color:rgba(255,255,255,.5);font-size:12px}
+    .track-play{color:var(--p);display:flex;align-items:center;justify-content:center}
+
+    /* ============================
+       SLIDE 9 — MOON
     ============================= */
     #s8{background:radial-gradient(ellipse at 30% 30%,#0a0a30,#020210)}
     .moon-scene{display:flex;flex-direction:column;align-items:center}
@@ -293,8 +308,8 @@
 
 <!-- Top bar -->
 <div id="top-bar">
-  <div class="top-title" id="slide-title">Abelhudinhos 💜</div>
-  <button class="sound-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
+  <div class="top-title" id="slide-title">Abelhudinhos <i data-lucide="heart" style="width:14px;color:var(--p);fill:var(--p);display:inline-block;vertical-align:middle"></i></div>
+  <button class="sound-btn" id="sound-btn" onclick="toggleSound()"><i data-lucide="volume-2" style="width:16px"></i></button>
 </div>
 
 <!-- Navigation zones -->
@@ -307,7 +322,7 @@
   <!-- SLIDE 0: COVER -->
   <div class="slide active" id="s0">
     <div class="cover-particles" id="particles"></div>
-    <div class="cover-emoji">💜</div>
+    <div class="cover-emoji"><i data-lucide="heart" style="width:64px;height:64px;color:var(--p);fill:var(--p)"></i></div>
     <div class="cover-names">Para <span>Você</span></div>
     <div class="cover-since">com todo meu amor • desde 29 de novembro de 2025</div>
     <div class="cover-msg">"Você é o meu lugar favorito no mundo. Essa página é nossa, para guardar cada momento especial da nossa história."</div>
@@ -320,7 +335,7 @@
     <div class="stars-bg" id="stars-bg"></div>
     <div class="label">Nosso Universo Particular</div>
     <div class="universe-text">
-      <h2>Nós dois contra o mundo 🌍</h2>
+      <h2>Nós dois contra o mundo <i data-lucide="globe" style="display:inline-block;vertical-align:middle"></i></h2>
       <p>Em cada olhar seu, encontro o universo inteiro. Você transformou a minha vida de uma forma que as palavras nunca conseguirão descrever completamente.</p>
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
@@ -329,7 +344,7 @@
         <div style="color:rgba(255,255,255,.5);font-size:11px">dias juntos</div>
       </div>
       <div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:12px;padding:10px 16px;text-align:center">
-        <div style="color:#EC4899;font-size:18px;font-weight:900">∞</div>
+        <div style="color:#EC4899;font-size:18px;font-weight:900"><i data-lucide="infinity" style="display:inline-block;vertical-align:middle"></i></div>
         <div style="color:rgba(255,255,255,.5);font-size:11px">amor</div>
       </div>
       <div style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:10px 16px;text-align:center">
@@ -344,7 +359,7 @@
   <!-- SLIDE 2: PHOTO GALLERY -->
   <div class="slide" id="s2">
     <div class="gallery-header">
-      <h2>Nossa Galeria 📸</h2>
+      <h2>Nossa Galeria <i data-lucide="camera" style="display:inline-block;vertical-align:-4px"></i></h2>
       <p>Deslize para ver nossos momentos ←→</p>
     </div>
     <div class="polaroid-scroll">
@@ -391,7 +406,7 @@
     </div>
     <a href="https://drive.google.com/drive/folders/16-1CpcfZsm7uOCQAJemohRrPSB9kaKBi" target="_blank"
       style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-top:4px;border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:100px">
-      📷 Ver álbum completo
+      <i data-lucide="image" style="width:14px"></i> Ver álbum completo
     </a>
     <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
@@ -424,12 +439,12 @@
   <!-- SLIDE 5: WORD GAME -->
   <div class="slide" id="s5">
     <div class="wg-title" id="wg-heading">O que mais gosto em você</div>
-    <div class="wg-hint">Descubra a palavra secreta (5 letras)</div>
+    <div class="wg-hint" id="wg-hint">Descubra a palavra secreta (5 letras)</div>
     <div class="wg-msg" id="wg-msg"></div>
     <div class="wg-grid" id="wg-grid"></div>
     <div id="wg-keyboard"></div>
-    <div class="wg-celebrate" id="wg-celebrate" style="display:none">🎉💜🎉</div>
-    <button class="next-btn" id="wg-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <div class="wg-celebrate" id="wg-celebrate" style="display:none;gap:10px;justify-content:center"><i data-lucide="party-popper" style="color:#EC4899"></i><i data-lucide="heart" style="color:var(--p);fill:var(--p);margin:0 8px"></i><i data-lucide="party-popper" style="color:#EC4899"></i></div>
+    <button class="next-btn" id="wg-next" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
@@ -438,8 +453,8 @@
     <div class="label">Nossa Jornada no Mapa</div>
     <div class="map-box" style="max-width:360px;width:100%">
       <div class="map-title-bar">
-        <h3>Nossa Jornada no Mapa 🗺️</h3>
-        <p>Juatuba, MG — onde tudo começou 💚</p>
+        <h3>Nossa Jornada no Mapa <i data-lucide="map" style="display:inline-block;vertical-align:-4px"></i></h3>
+        <p>Juatuba, MG — onde tudo começou <i data-lucide="heart" style="width:12px;color:var(--green);fill:var(--green);display:inline-block;vertical-align:-2px"></i></p>
       </div>
       <div id="real-map" style="width:100%;height:270px;border-radius:0 0 20px 20px;z-index:1"></div>
     </div>
@@ -450,16 +465,28 @@
   <!-- SLIDE 7: SPIN WHEEL -->
   <div class="slide" id="s7">
     <div class="spin-wrap">
-      <div class="spin-title-h">Para onde vamos<br>sair Hoje? 🎡</div>
+      <div class="spin-title-h">Para onde vamos<br>sair Hoje? <i data-lucide="compass" style="display:inline-block;vertical-align:-4px"></i></div>
       <div class="wheel-container">
         <div class="wheel-arrow">▼</div>
         <canvas id="wheel-canvas" width="220" height="220"></canvas>
-        <div class="wheel-center">❤️</div>
+        <div class="wheel-center"><i data-lucide="heart" style="color:var(--pk);fill:var(--pk);width:16px;height:16px"></i></div>
       </div>
       <div class="spin-result" id="spin-result"></div>
-      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">Girar Roleta 🎲</button>
+      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">Girar Roleta <i data-lucide="dices" style="width:18px;display:inline-block;vertical-align:-4px"></i></button>
     </div>
-    <button class="next-btn" id="spin-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <button class="next-btn" id="spin-next" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 8: MUSIC PLAYLIST -->
+  <div class="slide" id="s_music">
+    <div class="label">Nossa Trilha Sonora</div>
+    <div class="big-title" style="font-size:22px;margin-bottom:4px">Músicas Favoritas <i data-lucide="music" style="display:inline-block;vertical-align:-2px"></i></div>
+    <p class="subtitle" style="margin-bottom:8px">As canções que embalam a nossa história.</p>
+    <div class="playlist-wrap" id="playlist-wrap">
+      <!-- JS vai preencher -->
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
@@ -467,7 +494,7 @@
   <div class="slide" id="s8">
     <div class="moon-scene">
       <div class="label">Curiosidades</div>
-      <div class="big-title" style="font-size:18px;max-width:280px">Nos conhecemos sob<br>o brilho da lua 🌙</div>
+      <div class="big-title" style="font-size:18px;max-width:280px">Nos conhecemos sob<br>o brilho da lua <i data-lucide="moon" style="display:inline-block;vertical-align:-4px"></i></div>
       <div class="moon-svg-wrap">
         <svg width="140" height="140" viewBox="0 0 140 140">
           <defs>
@@ -494,7 +521,7 @@
         </svg>
       </div>
       <div class="moon-fact">
-        <h3>Lua Minguante 🌗</h3>
+        <h3>Lua Minguante <i data-lucide="moon" style="display:inline-block;vertical-align:-2px;width:14px"></i></h3>
         <p>Na noite de 29 de Novembro de 2025, em Juatuba, MG, o céu guardava um segredo: duas pessoas prestes a mudar a vida uma da outra para sempre.</p>
       </div>
     </div>
@@ -510,9 +537,9 @@
         <div class="ach-brand">✦ ABELHUDINHOS WRAPPED</div>
         <div class="ach-stars">★★★★★</div>
       </div>
-      <div class="ach-photo">💑</div>
+      <div class="ach-photo"><i data-lucide="users" style="width:40px;height:40px;color:#F59E0B"></i></div>
       <div class="ach-name-row">
-        <div class="ach-crown">👑</div>
+        <div class="ach-crown"><i data-lucide="crown" style="color:#F59E0B;width:16px;height:16px"></i></div>
         <div class="ach-name" id="ach-time-title">1 Ano Juntos</div>
       </div>
       <div class="ach-days" id="ach-days-text">365 DIAS JUNTOS</div>
@@ -530,7 +557,7 @@
   <!-- SLIDE 10: FINAL LETTER -->
   <div class="slide" id="s10">
     <div class="letter-wrap">
-      <div class="letter-emoji">💜</div>
+      <div class="letter-emoji"><i data-lucide="heart" style="width:48px;height:48px;color:var(--p);fill:var(--p)"></i></div>
       <div class="letter-to">Para</div>
       <div class="letter-name">Meu Grande Amor</div>
       <div class="letter-text">
@@ -539,7 +566,7 @@
       <div class="letter-from">Com todo meu amor,</div>
       <div class="letter-sig">Seu Amor 💜</div>
       <div class="letter-hearts">💜💜💜</div>
-      <button class="share-btn" onclick="sharePresente()">Compartilhar este presente 🎁</button>
+      <button class="share-btn" onclick="sharePresente()">Compartilhar este presente <i data-lucide="gift" style="width:16px;display:inline-block;vertical-align:-4px"></i></button>
     </div>
     <div class="watermark" style="bottom:16px">abelhudinhos.com.br — Privado</div>
   </div>
@@ -564,10 +591,15 @@ var CONFIG = {
   achievementTitle: '5 Meses Juntos',
   achievementDesc: 'Cinco meses de amor, sorrisos e momentos únicos. Cada dia ao seu lado é um presente. Isso é apenas o começo de uma história linda!',
   spinOptions: ['Cinema 🎬','Sushi 🍣','Parque 🌳','Restaurante 🍽️','Shopping 🛍️','Motel 🏨','Praia 🏖️','Churrasco 🥩'],
+  favoriteSongs: [
+    { title: 'Yellow', artist: 'Coldplay', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
+    { title: 'Perfect', artist: 'Ed Sheeran', cover: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef60b8b5207' },
+    { title: 'All of Me', artist: 'John Legend', cover: 'https://i.scdn.co/image/ab67616d0000b2731c3411b22e1b190f845a7062' }
+  ]
 };
 
 // ===== SLIDES =====
-var TOTAL = 11;
+var TOTAL = 12;
 var cur = 0;
 var muted = false;
 var progressTimer = null;
@@ -635,7 +667,7 @@ function goSlide(n) {
   onSlideEnter(cur);
   
   // Disable nav zones on interactive slides to allow internal clicks
-  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7);
+  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7 || cur === 8);
   document.getElementById('nav-left').style.pointerEvents = isInteractive ? 'none' : 'auto';
   document.getElementById('nav-right').style.pointerEvents = isInteractive ? 'none' : 'auto';
 }
@@ -646,7 +678,7 @@ function prevSlide() { if (cur > 0) goSlide(cur - 1); }
 var titles = [
   'Abelhudinhos 💜','Nosso Universo','Nossa Galeria','Nossa Jornada',
   'Mapa das Estrelas','Jogo de Palavras','Jornada no Mapa',
-  'Roleta Surpresa','Curiosidades','Conquistas','Carta Final'
+  'Roleta Surpresa','Nossas Músicas','Curiosidades','Conquistas','Carta Final'
 ];
 function updateTopBar() {
   document.getElementById('slide-title').textContent = titles[cur] || 'Abelhudinhos';
@@ -658,11 +690,12 @@ function toggleSound() {
   var audio = document.getElementById('bgm');
   if (muted) {
     audio.pause();
-    document.getElementById('sound-btn').textContent = '🔇';
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-x" style="width:16px"></i>';
   } else {
     audio.play().catch(function(){});
-    document.getElementById('sound-btn').textContent = '🔊';
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-2" style="width:16px"></i>';
   }
+  lucide.createIcons();
 }
 
 // ===== SLIDE ENTER ACTIONS =====
@@ -675,9 +708,10 @@ function onSlideEnter(n) {
   if (n === 1) initUniverse();
   if (n === 3) initTimeline();
   if (n === 4) initStarMap();
-  if (n === 5 && !wgInitialized) initWordGame();
+  if (n === 5 && !wgInitialized) setTimeout(initWordGame, 100);
   if (n === 6) setTimeout(initRealMap, 120);
   if (n === 7) initSpinWheel();
+  if (n === 8) initMusic();
 }
 
 // ===== COVER =====
@@ -821,12 +855,12 @@ var wgLost = false;
 var wgKeyStatus = {};
 
 function initWordGame() {
-  wgInitialized = true;
   wgWord = CONFIG.secretWord.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   document.getElementById('wg-heading').textContent = CONFIG.wordDescription;
   document.getElementById('wg-hint').textContent = CONFIG.wordHint;
   renderWGGrid();
   renderWGKeyboard();
+  wgInitialized = true;
 }
 
 function renderWGGrid() {
@@ -935,7 +969,7 @@ function submitWGGuess() {
   if (result.every(function(r) { return r.status === 'correct'; })) {
     wgWon = true;
     showWGMsg('Você acertou! 💜 Era ' + wgWord + '!');
-    document.getElementById('wg-celebrate').style.display = 'block';
+    document.getElementById('wg-celebrate').style.display = 'flex';
     document.getElementById('wg-next').style.display = 'block';
     stopProgress();
     launchConfetti();
@@ -1128,6 +1162,28 @@ function spinWheel() {
   requestAnimationFrame(animate);
 }
 
+// ===== MUSIC PLAYLIST =====
+function initMusic() {
+  var wrap = document.getElementById('playlist-wrap');
+  if (wrap.children.length > 0) return;
+  
+  CONFIG.favoriteSongs.forEach(function(song) {
+    wrap.innerHTML += `
+      <div class="track-card">
+        <img src="${song.cover}" class="track-cover" alt="Capa" loading="lazy">
+        <div class="track-info">
+          <div class="track-title">${song.title}</div>
+          <div class="track-artist">${song.artist}</div>
+        </div>
+        <div class="track-play">
+          <i data-lucide="play" style="width:20px;height:20px;fill:var(--p)"></i>
+        </div>
+      </div>
+    `;
+  });
+  lucide.createIcons();
+}
+
 // ===== ACHIEVEMENTS =====
 function initAchievements() {
   var days = Math.floor((new Date() - CONFIG.startDate) / (1000*60*60*24));
@@ -1182,6 +1238,7 @@ buildProgBar();
 updateTopBar();
 initCover();
 startProgress();
+lucide.createIcons();
 </script>
 </body>
 </html>

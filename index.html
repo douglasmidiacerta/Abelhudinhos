@@ -6,6 +6,7 @@
   <title>Abelhudinhos — O presente que move corações</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
@@ -13,6 +14,7 @@
       --dark:#170B33;--text:#4A3370;--textl:#7A5FAA;--white:#fff;
     }
     body{font-family:'Inter',sans-serif;background:var(--pbg);color:var(--dark);overflow-x:hidden}
+    .lucide { width: 1em; height: 1em; stroke-width: 2; vertical-align: -0.125em; }
 
     /* ===== NAVBAR ===== */
     .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 24px;
@@ -271,25 +273,25 @@
     <div class="steps anim">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-ic">🐼</div>
+        <div class="step-ic"><i data-lucide="book-heart" style="width:44px;height:44px;color:var(--p)"></i></div>
         <h3>Conte a sua história</h3>
         <p>Preencha os dados e escolha elementos únicos para surpreender quem você ama.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-ic">🎨</div>
+        <div class="step-ic"><i data-lucide="palette" style="width:44px;height:44px;color:var(--p)"></i></div>
         <h3>Personalize cada detalhe</h3>
         <p>Escolha suas melhores fotos, a trilha sonora e defina o estilo visual que mais combina.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-ic">🔗</div>
+        <div class="step-ic"><i data-lucide="link" style="width:44px;height:44px;color:var(--p)"></i></div>
         <h3>Receba seu Link e QR Code</h3>
         <p>Você recebe instantaneamente o link da sua página e um QR Code exclusivo para compartilhar.</p>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <div class="step-ic">💜</div>
+        <div class="step-ic"><i data-lucide="heart" style="width:44px;height:44px;color:var(--p);fill:var(--p)"></i></div>
         <h3>Emocione quem você ama</h3>
         <p>Envie o presente e prepare-se para as lágrimas de felicidade. Uma experiência inesquecível.</p>
       </div>
@@ -319,7 +321,7 @@
         <!-- Main phone -->
         <div class="ph-main" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3">
           <div class="ph-wrap" style="position:relative">
-            <div class="feat-icon" id="feat-icon">📅</div>
+            <div class="feat-icon" id="feat-icon"><i data-lucide="calendar" style="color:#fff"></i></div>
             <div class="ph-frame"><div class="ph-notch"></div>
               <div class="ph-screen" id="screen-main"></div>
             </div>
@@ -356,12 +358,12 @@
     <div class="sec-lbl">⚡ VANTAGENS</div>
     <h2 class="sec-h">Por que escolher o <em>Abelhudinhos?</em></h2>
     <div class="res-grid anim">
-      <div class="res-card"><div class="res-ic">☁️</div><h3>Para sempre no ar</h3><p>Seu presente vai para a nuvem imediatamente. Para sempre online, acessível de qualquer lugar do mundo.</p></div>
-      <div class="res-card"><div class="res-ic">🎨</div><h3>100% personalizável</h3><p>Escolha fotos, músicas, mensagens e jogos interativos. Cada detalhe pensado para emocionar!</p></div>
-      <div class="res-card"><div class="res-ic">🎵</div><h3>Retrospectiva única</h3><p>Uma retrospectiva animada para relembrar os melhores momentos dessa história especial.</p></div>
-      <div class="res-card"><div class="res-ic">🔒</div><h3>Privado e seguro</h3><p>Seu site tem link único e privado. Somente quem você compartilhar poderá acessar.</p></div>
-      <div class="res-card"><div class="res-ic">📱</div><h3>Perfeito no celular</h3><p>Desenvolvido para ser visto no celular, como stories. Uma experiência imersiva e emocionante.</p></div>
-      <div class="res-card"><div class="res-ic">⚡</div><h3>Pronto em 5 minutos</h3><p>Sem complicações. Em poucos minutos você cria algo único e inesquecível para quem você ama.</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="cloud" style="color:var(--p)"></i></div><h3>Para sempre no ar</h3><p>Seu presente vai para a nuvem imediatamente. Para sempre online, acessível de qualquer lugar do mundo.</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="palette" style="color:var(--p)"></i></div><h3>100% personalizável</h3><p>Escolha fotos, músicas, mensagens e jogos interativos. Cada detalhe pensado para emocionar!</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="music" style="color:var(--p)"></i></div><h3>Retrospectiva única</h3><p>Uma retrospectiva animada para relembrar os melhores momentos dessa história especial.</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="lock" style="color:var(--p)"></i></div><h3>Privado e seguro</h3><p>Seu site tem link único e privado. Somente quem você compartilhar poderá acessar.</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="smartphone" style="color:var(--p)"></i></div><h3>Perfeito no celular</h3><p>Desenvolvido para ser visto no celular, como stories. Uma experiência imersiva e emocionante.</p></div>
+      <div class="res-card"><div class="res-ic"><i data-lucide="zap" style="color:var(--p)"></i></div><h3>Pronto em 5 minutos</h3><p>Sem complicações. Em poucos minutos você cria algo único e inesquecível para quem você ama.</p></div>
     </div>
   </div>
 </section>
@@ -436,7 +438,7 @@
 <!-- ===== CTA BAND ===== -->
 <div style="padding:0 24px 80px">
   <div class="cta-band anim">
-    <div style="font-size:48px;margin-bottom:14px">💜</div>
+    <div style="font-size:48px;margin-bottom:14px;display:flex;justify-content:center"><i data-lucide="heart" style="width:56px;height:56px;color:#fff;fill:#fff"></i></div>
     <h2>Pronto para emocionar quem você ama?</h2>
     <p>Crie agora um presente único e inesquecível. Em 5 minutos!</p>
     <a href="presente.html" class="btn-w">Criar meu presente ↗</a>
@@ -445,7 +447,7 @@
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <div class="ft-logo">🐼 Abelhudinhos</div>
+  <div class="ft-logo"><i data-lucide="gift" style="display:inline-block;vertical-align:middle"></i> Abelhudinhos</div>
   <ul class="ft-links">
     <li><a href="#como">Como funciona</a></li>
     <li><a href="#recursos">Recursos</a></li>
@@ -454,9 +456,9 @@
     <li><a href="presente.html">Ver demo</a></li>
   </ul>
   <div class="ft-social">
-    <a href="#" class="soc-btn">📷</a>
-    <a href="#" class="soc-btn">🎵</a>
-    <a href="#" class="soc-btn">💬</a>
+    <a href="#" class="soc-btn"><i data-lucide="camera" style="width:18px"></i></a>
+    <a href="#" class="soc-btn"><i data-lucide="music" style="width:18px"></i></a>
+    <a href="#" class="soc-btn"><i data-lucide="message-circle" style="width:18px"></i></a>
   </div>
   <div class="ft-copy">© 2024 Abelhudinhos. Feito com 💜 para quem ama de verdade.</div>
 </footer>
@@ -772,6 +774,9 @@ buildDots();
 goF(0);
 // Auto-advance
 setInterval(function(){nextF()},4000);
+lucide.createIcons();
 </script>
 </body>
 </html>
+
+
