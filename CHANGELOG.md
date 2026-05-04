@@ -1,5 +1,14 @@
 # Changelog - Abelhudinhos
 
+## [1.7.0] - 2026-05-04
+
+### Corrigido / Melhorado
+- **Jornada no Mapa (Tela Cheia)**: O mapa da jornada agora ocupa a tela inteira, proporcionando uma navegação muito mais imersiva.
+- **Mapa das Estrelas Customizável**: Nomes e coordenadas agora são lidos do objeto `CONFIG`, permitindo ajustes fáceis pelo usuário.
+- **Correção na Roleta**: Corrigido bug que impedia o giro e ajustada a lógica de cálculo do resultado para maior precisão.
+- **Player de Música (Correção)**: Adicionado tratamento de erro para reprodução de áudio, garantindo que o play funcione após a interação do usuário.
+- **Variedade na Galeria**: Legendas e localizações das fotos foram revisadas para remover repetições e tornar a jornada mais dinâmica.
+
 ## [1.6.0] - 2026-05-04
 
 ### Adicionado / Modificado

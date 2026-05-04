@@ -201,7 +201,7 @@
        SLIDE 7 — SPIN WHEEL
     ============================= */
     #s7{background:#0d0d0d}
-    .spin-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .spin-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;pointer-events:auto;z-index:50}
     .spin-title-h{color:#fff;font-size:18px;font-weight:800;text-align:center;line-height:1.3;margin-bottom:4px}
     .wheel-container{position:relative;width:300px;height:300px;max-width:90vw;max-height:90vw}
     #wheel-canvas{border-radius:50%;box-shadow:0 0 30px rgba(124,58,237,.3);width:100%;height:100%}
@@ -417,11 +417,11 @@
     </div>
     
     <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; justify-content:space-between; padding: 40px 20px 80px; pointer-events:none">
-       <div style="font-family:'Georgia', serif; font-size:32px; font-style:italic; color:#fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8)">Edu e Ana</div>
+       <div style="font-family:'Georgia', serif; font-size:32px; font-style:italic; color:#fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8)" id="star-names">Edu e Ana</div>
        
        <div style="text-align:center; margin-bottom: 20px">
          <div class="star-quote">"O céu quando nossos mundos se colidiram 🌌<br>🤍"</div>
-         <div class="star-coords">PIRES DO RIO, GO, BRASIL<br>30 DE DEZEMBRO DE 2020 - 22:00<br>17.3492°S 48.3935°W</div>
+         <div class="star-coords" id="star-coords">PIRES DO RIO, GO, BRASIL<br>30 DE DEZEMBRO DE 2020 - 22:00<br>17.3492°S 48.3935°W</div>
        </div>
     </div>
     <button class="next-btn" onclick="nextSlide()" style="z-index:10; background:rgba(255,255,255,0.2)">Próxima Seção →</button>
@@ -440,17 +440,16 @@
   </div>
 
   <!-- SLIDE 6: MAP JOURNEY -->
-  <div class="slide" id="s6">
-    <div class="label">Nossa Jornada no Mapa</div>
-    <div class="map-box" style="max-width:360px;width:100%">
-      <div class="map-title-bar">
-        <h3>Nossa Jornada no Mapa <i data-lucide="map" style="display:inline-block;vertical-align:-4px"></i></h3>
-        <p>Juatuba, MG — onde tudo começou <i data-lucide="heart" style="width:12px;color:var(--green);fill:var(--green);display:inline-block;vertical-align:-2px"></i></p>
+  <div class="slide" id="s6" style="padding:0">
+    <div id="real-map" style="position:absolute; inset:0; z-index:1"></div>
+    <div style="position:absolute; top:40px; left:20px; right:20px; z-index:2; pointer-events:none">
+      <div class="label" style="text-align:left; margin-bottom:4px">Nossa Jornada</div>
+      <div style="background:rgba(26,42,58,0.8); backdrop-filter:blur(8px); padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,0.1)">
+        <h3 style="color:#fff; font-size:14px; font-weight:700">Nossa Jornada no Mapa <i data-lucide="map" style="display:inline-block;vertical-align:-4px"></i></h3>
+        <p style="color:rgba(255,255,255,0.6); font-size:11px">Onde cada memória foi criada 💜</p>
       </div>
-      <div id="real-map" style="width:100%;height:270px;border-radius:0 0 20px 20px;z-index:1"></div>
     </div>
-    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
-    <div class="watermark">abelhudinhos.com.br — Privado</div>
+    <button class="next-btn" onclick="nextSlide()" style="z-index:10; background:rgba(0,0,0,0.4)">Próxima Seção →</button>
   </div>
 
   <!-- SLIDE 7: SPIN WHEEL -->
@@ -742,6 +741,8 @@ var CONFIG = {
   coupleName: 'Abelhudinhos',
   person1: 'Você',
   startDate: new Date('2025-11-29'),
+  starMapNames: 'Edu e Ana',
+  starMapCoords: 'PIRES DO RIO, GO, BRASIL<br>30 DE DEZEMBRO DE 2020 - 22:00<br>17.3492°S 48.3935°W',
   secretWord: 'LINDA',              // Update this word!
   wordHint: '(5 letras)',
   wordDescription: 'O que você é para mim',
@@ -865,16 +866,16 @@ function toggleSound() {
 // ===== SLIDE ENTER ACTIONS =====
 // ===== IG FEED INIT =====
 var igPhotos = [
-  {src:'https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400', caption:'26 Dez 2025 💜', loc:'Juatuba, MG'},
-  {src:'https://lh3.googleusercontent.com/d/1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK=w400', caption:'01 Fev 2026 🥰', loc:'Nosso Cantinho'},
-  {src:'https://lh3.googleusercontent.com/d/19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y=w400', caption:'16 Fev 2026 ❤️', loc:'Passeio Perfeito'},
-  {src:'https://lh3.googleusercontent.com/d/1GII0E3YvZ4xBiyr8r0Lz9KnZ8JK25j9y=w400', caption:'24 Abr 2026 ✨', loc:'Comemorando'},
-  {src:'https://lh3.googleusercontent.com/d/1tR_Tqq0w7Qm1G3_ir8Na8NtwDISIFw6f=w400', caption:'24 Abr 2026 💕', loc:'Comemorando'},
-  {src:'https://lh3.googleusercontent.com/d/1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex=w400', caption:'Nossos momentos 🌟', loc:'Pelo Mundo'},
-  {src:'https://lh3.googleusercontent.com/d/1iHGu8VUeyxJXXY7MIwhsGUkU-7L_0DdN=w400', caption:'Sempre juntos 💜', loc:'Nosso Lar'},
-  {src:'https://lh3.googleusercontent.com/d/184VaW72OlVCx80hzBXeza5kqpdI9xpN6=w400', caption:'Nossa história 🥰', loc:'Lembranças'},
-  {src:'https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400', caption:'Momentos lindos 💫', loc:'Viagem'},
-  {src:'https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400', caption:'Com você 💜', loc:'Noite Especial'}
+  {src:'https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400', caption:'Onde tudo começou 💜', loc:'Juatuba, MG'},
+  {src:'https://lh3.googleusercontent.com/d/1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK=w400', caption:'Aquele pôr do sol inesquecível 🥰', loc:'Mirante da Serra'},
+  {src:'https://lh3.googleusercontent.com/d/19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y=w400', caption:'Nosso primeiro jantar oficial ❤️', loc:'Piazza Italia'},
+  {src:'https://lh3.googleusercontent.com/d/1GII0E3YvZ4xBiyr8r0Lz9KnZ8JK25j9y=w400', caption:'Sábado de preguiça e muito amor ✨', loc:'Em Casa'},
+  {src:'https://lh3.googleusercontent.com/d/1tR_Tqq0w7Qm1G3_ir8Na8NtwDISIFw6f=w400', caption:'Aquele dia que rimos até a barriga doer 💕', loc:'Parque das Águas'},
+  {src:'https://lh3.googleusercontent.com/d/1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex=w400', caption:'Explorando novos caminhos juntos 🌟', loc:'Diamantina'},
+  {src:'https://lh3.googleusercontent.com/d/1iHGu8VUeyxJXXY7MIwhsGUkU-7L_0DdN=w400', caption:'Meu porto seguro 💜', loc:'Lugar Especial'},
+  {src:'https://lh3.googleusercontent.com/d/184VaW72OlVCx80hzBXeza5kqpdI9xpN6=w400', caption:'Cada detalhe nosso é perfeito 🥰', loc:'Belo Horizonte'},
+  {src:'https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400', caption:'Pelos olhos de quem ama 💫', loc:'Viagem'},
+  {src:'https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400', caption:'Para sempre, nós dois 💜', loc:'Noite de Estrelas'}
 ];
 function initTinderGallery() {
   var feed = document.getElementById('tinder-gallery');
@@ -1049,6 +1050,10 @@ function initStarMap() {
   });
   
   svg.innerHTML = html;
+  
+  // Set names and coords from CONFIG
+  document.getElementById('star-names').textContent = CONFIG.starMapNames;
+  document.getElementById('star-coords').innerHTML = CONFIG.starMapCoords;
 }
 
 // ===== WORD GAME =====
@@ -1351,17 +1356,20 @@ function spinWheel() {
     if (!start) start = ts;
     var elapsed = ts - start;
     var t = Math.min(elapsed / duration, 1);
-    spinAngle = startAngle + totalSpin * ease(t);
+    var currentSpin = totalSpin * ease(t);
+    spinAngle = (startAngle + currentSpin) % (Math.PI * 2);
     drawWheel(spinAngle);
     if (t < 1) {
       requestAnimationFrame(animate);
     } else {
       spinning = false;
       document.getElementById('spin-btn').disabled = false;
-      // Determine result: arrow points up
-      var normalAngle = spinAngle % (Math.PI * 2);
+      // Determine result: arrow points up (at -PI/2)
       var slice = (Math.PI * 2) / CONFIG.spinOptions.length;
-      var effectiveAngle = (-normalAngle + Math.PI * 20) % (Math.PI * 2);
+      // The drawing starts at angle - PI/2. 
+      // The winning slice is the one at the top (angle -PI/2)
+      // We need to find which slice index corresponds to the top position.
+      var effectiveAngle = (Math.PI * 2 - (spinAngle % (Math.PI * 2))) % (Math.PI * 2);
       var idx = Math.floor(effectiveAngle / slice) % CONFIG.spinOptions.length;
       var chosen = CONFIG.spinOptions[idx];
       document.getElementById('spin-result').innerHTML = '<i data-lucide="target" style="display:inline-block;vertical-align:-4px"></i> ' + chosen + '!';
@@ -1377,19 +1385,24 @@ function toggleSpPlay() {
   var audio = document.getElementById('bgm');
   var icon = document.getElementById('sp-play-icon');
   if (audio.paused) {
-    audio.play();
-    icon.setAttribute('data-lucide', 'pause');
-    icon.style.marginLeft = '0';
-    muted = false;
-    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-2" style="width:16px"></i>';
+    audio.play().then(function() {
+      icon.setAttribute('data-lucide', 'pause');
+      icon.style.marginLeft = '0';
+      muted = false;
+      document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-2" style="width:16px"></i>';
+      lucide.createIcons();
+    }).catch(function(e) {
+      console.error("Erro ao tocar áudio:", e);
+      alert("Por favor, clique em qualquer lugar da tela para habilitar o som e tente novamente.");
+    });
   } else {
     audio.pause();
     icon.setAttribute('data-lucide', 'play');
     icon.style.marginLeft = '4px';
     muted = true;
     document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-x" style="width:16px"></i>';
+    lucide.createIcons();
   }
-  lucide.createIcons();
 }
 
 setInterval(function() {
