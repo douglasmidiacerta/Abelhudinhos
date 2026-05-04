@@ -1,5 +1,12 @@
 # Changelog - Abelhudinhos
 
+## [1.8.0] - 2026-05-04
+
+### Corrigido / Finalizado
+- **Remoção definitiva de nomes estáticos**: O Mapa das Estrelas agora usa "Nosso Amor" como padrão e sincroniza corretamente com o `CONFIG`, eliminando os nomes "Edu e Ana" que estavam hardcoded.
+- **Sincronização de Coordenadas**: As coordenadas padrão do Mapa das Estrelas agora refletem o início da jornada em Juatuba, MG (29/11/2025), conforme solicitado.
+- **Robustez na Interação**: Adicionados listeners de carregamento global para garantir que a Roleta e o Player de Música inicializem corretamente mesmo em conexões lentas.
+
 ## [1.7.0] - 2026-05-04
 
 ### Corrigido / Melhorado
