@@ -39,15 +39,16 @@
     .slide.active{opacity:1;pointer-events:auto}
 
     /* ===== NAV ZONES ===== */
-    #nav-left{position:fixed;left:0;top:0;width:25%;height:100%;z-index:50;cursor:pointer}
-    #nav-right{position:fixed;right:0;top:0;width:25%;height:100%;z-index:50;cursor:pointer}
-    .nav-arrow-btn{position:absolute;top:50%;transform:translateY(-50%);
+    .nav-zone{position:fixed;top:0;width:25%;height:100%;z-index:40;cursor:pointer}
+    #nav-left{left:0}
+    #nav-right{right:0}
+    .nav-arrow-btn{position:fixed;top:50%;transform:translateY(-50%);
       width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);
       border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;
-      justify-content:center;cursor:pointer;transition:.3s;backdrop-filter:blur(4px);pointer-events:none}
-    #nav-left .nav-arrow-btn{left:16px}
-    #nav-right .nav-arrow-btn{right:16px}
-    #nav-left:hover .nav-arrow-btn, #nav-right:hover .nav-arrow-btn{background:rgba(255,255,255,.25);transform:translateY(-50%) scale(1.1)}
+      justify-content:center;cursor:pointer;transition:.3s;backdrop-filter:blur(4px);z-index:100;pointer-events:auto}
+    #nav-left-btn{left:16px}
+    #nav-right-btn{right:16px}
+    #nav-left-btn:hover, #nav-right-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-50%) scale(1.1)}
 
     /* ===== NEXT BUTTON ===== */
     .next-btn{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
@@ -304,6 +305,23 @@
       100%{transform:translateY(110vh) rotate(720deg);opacity:.3}
     }
 
+    /* ===== IG FEED ===== */
+    .ig-feed { width: 100%; height: 100%; overflow-y: auto; padding-bottom: 60px; pointer-events: auto; }
+    .ig-feed::-webkit-scrollbar { display: none; }
+    .ig-post { background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+    .ig-header { display: flex; align-items: center; padding: 10px 12px; }
+    .ig-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--p); padding: 2px; }
+    .ig-user { margin-left: 10px; flex: 1; }
+    .ig-name { color: #fff; font-size: 13px; font-weight: 700; }
+    .ig-loc { color: rgba(255,255,255,.5); font-size: 11px; }
+    .ig-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .ig-actions { padding: 12px 12px 6px; display: flex; gap: 12px; }
+    .ig-actions i { color: #fff; width: 22px; height: 22px; cursor: pointer; transition: .2s; }
+    .ig-actions i.liked { color: #EC4899; fill: #EC4899; }
+    .ig-likes { padding: 0 12px; color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .ig-caption { padding: 0 12px 12px; color: rgba(255,255,255,.85); font-size: 13px; line-height: 1.4; }
+    .ig-caption b { color: #fff; font-weight: 700; }
+    
     /* ===== FUNIL DE CONEXÃO ===== */
     .about-scroll::-webkit-scrollbar { width: 4px; }
     .about-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
@@ -336,8 +354,10 @@
 </div>
 
 <!-- Navigation zones -->
-<div id="nav-left" onclick="prevSlide()"><div class="nav-arrow-btn"><i data-lucide="chevron-left"></i></div></div>
-<div id="nav-right" onclick="nextSlide()"><div class="nav-arrow-btn"><i data-lucide="chevron-right"></i></div></div>
+<div id="nav-left" class="nav-zone" onclick="prevSlide()"></div>
+<div id="nav-right" class="nav-zone" onclick="nextSlide()"></div>
+<button id="nav-left-btn" class="nav-arrow-btn" onclick="prevSlide()"><i data-lucide="chevron-left"></i></button>
+<button id="nav-right-btn" class="nav-arrow-btn" onclick="nextSlide()"><i data-lucide="chevron-right"></i></button>
 
 <!-- ===== SLIDES ===== -->
 <div id="slides">
@@ -379,58 +399,14 @@
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
-  <!-- SLIDE 2: PHOTO GALLERY -->
+  <!-- SLIDE 2: PHOTO GALLERY (IG FEED) -->
   <div class="slide" id="s2">
-    <div class="gallery-header">
-      <h2>Nossa Galeria <i data-lucide="camera" style="display:inline-block;vertical-align:-4px"></i></h2>
-      <p>Deslize para ver nossos momentos ←→</p>
+    <div class="gallery-header" style="margin-bottom:12px">
+      <h2>Nossa Galeria <i data-lucide="instagram" style="display:inline-block;vertical-align:-4px"></i></h2>
     </div>
-    <div class="polaroid-scroll">
-      <div class="polaroid" style="--rot:-3deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400" alt="foto" loading="lazy" onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='flex')">
-        <div class="polaroid-caption">26 Dez 2025 💜</div>
-      </div>
-      <div class="polaroid" style="--rot:2deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">01 Fev 2026 🥰</div>
-      </div>
-      <div class="polaroid" style="--rot:-2deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">16 Fev 2026 ❤️</div>
-      </div>
-      <div class="polaroid" style="--rot:3deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1GII0E3YvZ4xBiyr8r0Lz9KnZ8JK25j9y=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">24 Abr 2026 ✨</div>
-      </div>
-      <div class="polaroid" style="--rot:-1deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1tR_Tqq0w7Qm1G3_ir8Na8NtwDISIFw6f=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">24 Abr 2026 💕</div>
-      </div>
-      <div class="polaroid" style="--rot:2deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">Nossos momentos 🌟</div>
-      </div>
-      <div class="polaroid" style="--rot:-3deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1iHGu8VUeyxJXXY7MIwhsGUkU-7L_0DdN=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">Sempre juntos 💜</div>
-      </div>
-      <div class="polaroid" style="--rot:1deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/184VaW72OlVCx80hzBXeza5kqpdI9xpN6=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">Nossa história 🥰</div>
-      </div>
-      <div class="polaroid" style="--rot:-2deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">Momentos lindos 💫</div>
-      </div>
-      <div class="polaroid" style="--rot:3deg">
-        <img class="polaroid-img" src="https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400" alt="foto" loading="lazy">
-        <div class="polaroid-caption">Com você 💜</div>
-      </div>
+    <div class="ig-feed" id="ig-feed">
+      <!-- Preenchido via JS -->
     </div>
-    <a href="https://drive.google.com/drive/folders/16-1CpcfZsm7uOCQAJemohRrPSB9kaKBi" target="_blank"
-      style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-top:4px;border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:100px">
-      <i data-lucide="image" style="width:14px"></i> Ver álbum completo
-    </a>
     <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
@@ -755,10 +731,10 @@ var CONFIG = {
   achievementDesc: 'Cinco meses de amor, sorrisos e momentos únicos. Cada dia ao seu lado é um presente. Isso é apenas o começo de uma história linda!',
   spinOptions: ['Cinema','Sushi','Parque','Restaurante','Shopping','Motel','Praia','Churrasco'],
   favoriteSongs: [
-    { title: 'Eu te escolheria todo dia', artist: 'Nossa Música Favorita', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
-    { title: 'Yellow', artist: 'Coldplay', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
-    { title: 'Perfect', artist: 'Ed Sheeran', cover: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef60b8b5207' },
-    { title: 'All of Me', artist: 'John Legend', cover: 'https://i.scdn.co/image/ab67616d0000b2731c3411b22e1b190f845a7062' }
+    { trackId: '1zB4vmk8tFRmM9UHI8vfNq' }, // Eu te escolheria todo dia (ou similar)
+    { trackId: '3AJwUDP919kvQ9QcozQPxg' }, // Yellow - Coldplay
+    { trackId: '0tgVpDi06FyKpA1z0VMD4v' }, // Perfect - Ed Sheeran
+    { trackId: '3U4isOIWM3VvDubwSI3y7a' }  // All of Me - John Legend
   ]
 };
 
@@ -863,7 +839,46 @@ function toggleSound() {
 }
 
 // ===== SLIDE ENTER ACTIONS =====
+// ===== IG FEED INIT =====
+var igPhotos = [
+  {src:'https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400', caption:'26 Dez 2025 💜', loc:'Juatuba, MG'},
+  {src:'https://lh3.googleusercontent.com/d/1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK=w400', caption:'01 Fev 2026 🥰', loc:'Nosso Cantinho'},
+  {src:'https://lh3.googleusercontent.com/d/19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y=w400', caption:'16 Fev 2026 ❤️', loc:'Passeio Perfeito'},
+  {src:'https://lh3.googleusercontent.com/d/1GII0E3YvZ4xBiyr8r0Lz9KnZ8JK25j9y=w400', caption:'24 Abr 2026 ✨', loc:'Comemorando'},
+  {src:'https://lh3.googleusercontent.com/d/1tR_Tqq0w7Qm1G3_ir8Na8NtwDISIFw6f=w400', caption:'24 Abr 2026 💕', loc:'Comemorando'},
+  {src:'https://lh3.googleusercontent.com/d/1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex=w400', caption:'Nossos momentos 🌟', loc:'Pelo Mundo'},
+  {src:'https://lh3.googleusercontent.com/d/1iHGu8VUeyxJXXY7MIwhsGUkU-7L_0DdN=w400', caption:'Sempre juntos 💜', loc:'Nosso Lar'},
+  {src:'https://lh3.googleusercontent.com/d/184VaW72OlVCx80hzBXeza5kqpdI9xpN6=w400', caption:'Nossa história 🥰', loc:'Lembranças'},
+  {src:'https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400', caption:'Momentos lindos 💫', loc:'Viagem'},
+  {src:'https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400', caption:'Com você 💜', loc:'Noite Especial'}
+];
+function initIgFeed() {
+  var feed = document.getElementById('ig-feed');
+  if(!feed || feed.children.length > 0) return;
+  var html = '';
+  igPhotos.forEach(function(p, i) {
+    html += '<div class="ig-post">' +
+      '<div class="ig-header">' +
+        '<img src="https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400" class="ig-avatar">' +
+        '<div class="ig-user"><div class="ig-name">abelhudinhos</div><div class="ig-loc">'+p.loc+'</div></div>' +
+        '<i data-lucide="more-horizontal" style="color:#fff"></i>' +
+      '</div>' +
+      '<img class="ig-img" src="'+p.src+'" loading="lazy">' +
+      '<div class="ig-actions">' +
+        '<i data-lucide="heart" class="liked"></i>' +
+        '<i data-lucide="message-circle"></i>' +
+        '<i data-lucide="send"></i>' +
+      '</div>' +
+      '<div class="ig-likes">Curtido por você e milhares de pessoas</div>' +
+      '<div class="ig-caption"><b>abelhudinhos</b> '+p.caption+'</div>' +
+    '</div>';
+  });
+  feed.innerHTML = html;
+  lucide.createIcons();
+}
+
 function onSlideEnter(n) {
+  if (n === 2) { initIgFeed(); }
   if (n === 1 && !muted && !audioStarted) {
     audioStarted = true;
     document.getElementById('bgm').play().catch(function(){});
@@ -1335,20 +1350,8 @@ function initMusic() {
   if (wrap.children.length > 0) return;
   
   CONFIG.favoriteSongs.forEach(function(song) {
-    wrap.innerHTML += `
-      <div class="track-card">
-        <img src="${song.cover}" class="track-cover" alt="Capa" loading="lazy">
-        <div class="track-info">
-          <div class="track-title">${song.title}</div>
-          <div class="track-artist">${song.artist}</div>
-        </div>
-        <div class="track-play">
-          <i data-lucide="play" style="width:20px;height:20px;fill:var(--p)"></i>
-        </div>
-      </div>
-    `;
+    wrap.innerHTML += '<iframe style="border-radius:12px;margin-bottom:12px" src="https://open.spotify.com/embed/track/' + song.trackId + '?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
   });
-  lucide.createIcons();
 }
 
 // ===== ACHIEVEMENTS =====

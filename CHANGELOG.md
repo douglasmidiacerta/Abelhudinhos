@@ -1,5 +1,14 @@
 # Changelog - Abelhudinhos
 
+## [1.5.0] - 2026-05-04
+
+### Adicionado
+- **Galeria Instagram**: O visual de polaroids foi substituído por um feed escuro inspirado no Instagram, contendo foto de perfil, botão de like, localização e comentários.
+- **Integração Real com Spotify**: A lista de músicas favoritas foi convertida em reprodutores autênticos do Spotify, permitindo dar play na música diretamente da página.
+
+### Corrigido
+- **Botões de Navegação Presos**: As setas de "Próximo" e "Anterior" foram separadas da zona de clique invisível, garantindo que sempre funcionem mesmo nas abas de interatividade complexa (Roleta, Wordle, Mapa, etc).
+
 ## [1.4.0] - 2026-05-04
 
 ### Adicionado
