@@ -1,5 +1,11 @@
 # Changelog - Abelhudinhos
 
+## [1.4.0] - 2026-05-04
+
+### Adicionado
+- **Funil de Conexão (O Que Devemos Saber)**: Implementada uma nova seção massiva de interatividade em forma de cartões (Nível 1, 2 e 3) contendo as principais curiosidades, alinhamentos e preferências do casal, projetada com grid responsivo e cores temáticas (Ele x Ela).
+- **Trilha Sonora**: Adicionada a faixa "Eu te escolheria todo dia" como música favorita principal da playlist interativa.
+
 ## [1.3.0] - 2026-05-04
 
 ### Adicionado

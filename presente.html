@@ -303,6 +303,22 @@
       0%{transform:translateY(0) rotate(0deg);opacity:1}
       100%{transform:translateY(110vh) rotate(720deg);opacity:.3}
     }
+
+    /* ===== FUNIL DE CONEXÃO ===== */
+    .about-scroll::-webkit-scrollbar { width: 4px; }
+    .about-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
+    .about-level { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+    .lvl-title { background: rgba(255,255,255,.1); padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .qa-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .qa-title { font-size: 11px; color: rgba(255,255,255,.6); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .qa-row { display: flex; gap: 8px; }
+    .qa-col { flex: 1; padding: 8px; border-radius: 6px; }
+    .qa-col.ele { background: rgba(96,165,250,.1); border-left: 3px solid #60A5FA; }
+    .qa-col.ela { background: rgba(236,72,153,.1); border-left: 3px solid #EC4899; }
+    .qa-tag { font-size: 9px; font-weight: 800; margin-bottom: 4px; letter-spacing: 1px; }
+    .qa-col.ele .qa-tag { color: #60A5FA; }
+    .qa-col.ela .qa-tag { color: #EC4899; }
+    .qa-ans { color: #fff; font-size: 11px; font-weight: 500; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -497,7 +513,147 @@
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
-  <!-- SLIDE 8: MOON CURIOSITY -->
+  <!-- SLIDE 8: O QUE UM DEVE SABER -->
+  <div class="slide" id="s_about">
+    <div class="about-wrapper" style="width:100%;height:100%;display:flex;flex-direction:column;padding-top:20px">
+      <div class="label" style="margin-bottom:4px">Funil de Conexão</div>
+      <div class="big-title" style="font-size:20px;margin-bottom:12px;line-height:1.2">O Que Devemos Saber<br>Um Sobre o Outro</div>
+      
+      <div class="about-scroll" style="flex:1;overflow-y:auto;padding-right:4px;padding-bottom:40px;display:flex;flex-direction:column;pointer-events:auto">
+        
+        <!-- NÍVEL 1 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="info" style="color:var(--p)"></i> Nível 1: Curiosidades Básicas</div>
+          
+          <div class="qa-card"><div class="qa-title">🎨 Cor Favorita</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Azul Bebê</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Lilás</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍝 Comida Favorita</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Strogonoff, Torta de Frango</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Strogonoff</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🤢 Não come de jeito nenhum</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Jiló, dobradinha, pequi</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Chorizo e pé de moleque</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍹 Bebidas</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Limoneto, Sprite, Beats</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Vitamina de amora, Vinho seco</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍰 Sobremesa</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Bolo de cenoura com chocolate</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Brigadeiro de colher, Broa</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">📺 Filmes e Séries</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Sem limite, Friends, Um maluco no pedaço, The Big Bang Theory</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">The Big Bang Theory, You, Brighton, A Cabana</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎵 Música</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Trap, Filipe Ret, Henrique e Juliano</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Jorge e Matheus, Menos é Mais, Almir Sater, Daniel</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎮 Hobbies</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Dirigir</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Treinar, pedalar, ir ao shopping</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👕 Tamanhos (Calçado/Calça/Blusa)</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">40 / 41 / G</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">36 / 38 / M</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎁 Flores e Presentes</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Experiências</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Rosas, Presentes úteis</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">✈️ Lugar dos Sonhos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Lençóis Maranhenses, Grécia, Monaco</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Itália, Maceió, Caribe</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🤪 Mania ou Tique</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Expressivo</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Limpeza</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👻 Fobia ou Medo</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Medo de Vaca e Galinha</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Elevador, lugar fechado e o mar</div></div>
+          </div></div>
+        </div>
+
+        <!-- NÍVEL 2 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="coffee" style="color:var(--gold)"></i> Nível 2: Rotina e Convivência</div>
+          
+          <div class="qa-card"><div class="qa-title">🔋 Padrões de Energia</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Matutina</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Matutina</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🌅 Humor Matinal</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Acorda conversando</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Precisa de silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">😴 Lidando com o Cansaço</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Silêncio</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🌤️ Clima Ideal</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Praia, Piscina e Sol</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Praia, Piscina e Sol</div></div>
+          </div></div>
+        </div>
+
+        <!-- NÍVEL 3 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="shield" style="color:var(--green)"></i> Nível 3: Valores e Futuro</div>
+          
+          <div class="qa-card"><div class="qa-title">💰 Perfil Financeiro</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Focado no amanhã</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Focado no amanhã</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">📝 Organização</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Anota tudo</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Anota tudo</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🏠 Objetivos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Por enquanto alugar um imóvel</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Por enquanto alugar um imóvel</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👶 Filhos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Sim, 1 menino</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Sim, 1 menino</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👨‍👩‍👧 Família</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Bem próximos</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Bem próximos</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🔭 Visão de Futuro (10 anos)</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Em cidades do Brasil, em viagens</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Em Belo Horizonte</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">💖 Como se sentem amados</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Toque físico</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Tempo de qualidade</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">⚠️ Gatilhos Emocionais</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Mentira</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Gritar</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🥊 Estilo de Briga</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Resolver na hora</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Ficar em silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🕊️ Como pedir desculpas</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Não errar novamente</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Carinho e cuidado</div></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 9: MOON CURIOSITY -->
   <div class="slide" id="s8">
     <div class="moon-scene">
       <div class="label">Curiosidades</div>
@@ -599,6 +755,7 @@ var CONFIG = {
   achievementDesc: 'Cinco meses de amor, sorrisos e momentos únicos. Cada dia ao seu lado é um presente. Isso é apenas o começo de uma história linda!',
   spinOptions: ['Cinema','Sushi','Parque','Restaurante','Shopping','Motel','Praia','Churrasco'],
   favoriteSongs: [
+    { title: 'Eu te escolheria todo dia', artist: 'Nossa Música Favorita', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
     { title: 'Yellow', artist: 'Coldplay', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
     { title: 'Perfect', artist: 'Ed Sheeran', cover: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef60b8b5207' },
     { title: 'All of Me', artist: 'John Legend', cover: 'https://i.scdn.co/image/ab67616d0000b2731c3411b22e1b190f845a7062' }
@@ -606,7 +763,7 @@ var CONFIG = {
 };
 
 // ===== SLIDES =====
-var TOTAL = 12;
+var TOTAL = 13;
 var cur = 0;
 var muted = false;
 var progressTimer = null;
@@ -653,8 +810,8 @@ function startProgress() {
     updateProgBar();
     if (progressElapsed >= SLIDE_DURATION) {
       stopProgress();
-      // Auto-advance only for non-interactive slides (2=Gallery, 5=WordGame, 6=Map, 7=Wheel)
-      if (cur !== 2 && cur !== 5 && cur !== 6 && cur !== 7) nextSlide();
+      // Auto-advance only for non-interactive slides (2=Gallery, 5=WordGame, 6=Map, 7=Wheel, 9=About)
+      if (cur !== 2 && cur !== 5 && cur !== 6 && cur !== 7 && cur !== 9) nextSlide();
     }
   }, TICK);
 }
@@ -674,7 +831,7 @@ function goSlide(n) {
   onSlideEnter(cur);
   
   // Disable nav zones on interactive slides to allow internal clicks
-  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7 || cur === 8);
+  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7 || cur === 8 || cur === 9);
   document.getElementById('nav-left').style.pointerEvents = isInteractive ? 'none' : 'auto';
   document.getElementById('nav-right').style.pointerEvents = isInteractive ? 'none' : 'auto';
 }
@@ -685,7 +842,7 @@ function prevSlide() { if (cur > 0) goSlide(cur - 1); }
 var titles = [
   'Abelhudinhos 💜','Nosso Universo','Nossa Galeria','Nossa Jornada',
   'Mapa das Estrelas','Jogo de Palavras','Jornada no Mapa',
-  'Roleta Surpresa','Nossas Músicas','Curiosidades','Conquistas','Carta Final'
+  'Roleta Surpresa','Nossas Músicas','Sobre Nós','Curiosidades','Conquistas','Carta Final'
 ];
 function updateTopBar() {
   document.getElementById('slide-title').textContent = titles[cur] || 'Abelhudinhos';
