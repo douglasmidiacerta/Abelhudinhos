@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Abelhudinhos — Para Você, com Todo Meu Amor 💜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    :root{--p:#7C3AED;--pk:#EC4899;--gold:#F59E0B;--green:#10B981}
+    html,body{height:100%;overflow:hidden;background:#0d0d1a;font-family:'Inter',sans-serif}
+
+    /* ===== STORIES PROGRESS BAR ===== */
+    #prog-bar{position:fixed;top:0;left:0;right:0;z-index:100;
+      display:flex;gap:3px;padding:10px 12px 0}
+    .prog-seg{height:2.5px;border-radius:3px;background:rgba(255,255,255,.25);flex:1;
+      overflow:hidden;position:relative}
+    .prog-fill{position:absolute;top:0;left:0;height:100%;background:#fff;width:0%;transition:width .1s linear}
+
+    /* ===== TOP BAR ===== */
+    #top-bar{position:fixed;top:22px;left:0;right:0;z-index:99;
+      display:flex;align-items:center;justify-content:space-between;padding:6px 14px}
+    .top-title{color:#fff;font-size:13px;font-weight:700;letter-spacing:.5px}
+    .sound-btn{background:rgba(255,255,255,.15);border:none;color:#fff;
+      width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+      justify-content:center;cursor:pointer;font-size:12px;transition:.2s}
+    .sound-btn:hover{background:rgba(255,255,255,.3)}
+
+    /* ===== SECTIONS ===== */
+    #slides{height:100%;width:100%;position:relative}
+    .slide{position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;padding:64px 20px 80px;
+      opacity:0;pointer-events:none;transition:opacity .5s}
+    .slide.active{opacity:1;pointer-events:auto}
+
+    /* ===== NAV ZONES ===== */
+    #nav-left{position:fixed;left:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
+    #nav-right{position:fixed;right:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
+
+    /* ===== NEXT BUTTON ===== */
+    .next-btn{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+      background:rgba(255,255,255,.12);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.2);color:#fff;
+      padding:10px 24px;border-radius:100px;font-size:13px;font-weight:600;
+      cursor:pointer;transition:.3s;z-index:60;white-space:nowrap}
+    .next-btn:hover{background:rgba(255,255,255,.22)}
+
+    /* ===== WATERMARK ===== */
+    .watermark{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);
+      color:rgba(255,255,255,.2);font-size:11px;font-weight:500;white-space:nowrap}
+
+    /* ===== TYPOGRAPHY ===== */
+    .big-title{font-size:clamp(22px,5vw,36px);font-weight:900;color:#fff;
+      text-align:center;line-height:1.2;margin-bottom:12px}
+    .subtitle{font-size:14px;color:rgba(255,255,255,.6);text-align:center;
+      line-height:1.65;max-width:320px}
+    .label{font-size:11px;font-weight:700;letter-spacing:2px;
+      color:rgba(255,255,255,.4);text-align:center;margin-bottom:8px;text-transform:uppercase}
+
+    /* ============================
+       SLIDE 0 — COVER
+    ============================= */
+    #s0{background:linear-gradient(160deg,#0d0d1a 0%,#1a0a33 50%,#0d1a0d 100%)}
+    .cover-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+    .particle{position:absolute;border-radius:50%;animation:particleRise linear infinite}
+    @keyframes particleRise{
+      0%{transform:translateY(100vh) scale(0);opacity:0}
+      10%{opacity:.8}90%{opacity:.6}
+      100%{transform:translateY(-20px) scale(1.2);opacity:0}
+    }
+    .cover-emoji{font-size:64px;margin-bottom:20px;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+    .cover-names{font-size:clamp(28px,7vw,48px);font-weight:900;color:#fff;
+      text-align:center;margin-bottom:8px}
+    .cover-names span{color:var(--p)}
+    .cover-since{font-size:13px;color:rgba(255,255,255,.5);text-align:center;
+      margin-bottom:28px;letter-spacing:1px}
+    .cover-msg{font-size:16px;color:rgba(255,255,255,.85);text-align:center;
+      line-height:1.7;max-width:300px;font-style:italic}
+
+    /* ============================
+       SLIDE 1 — OUR UNIVERSE
+    ============================= */
+    #s1{background:linear-gradient(160deg,#0d0320 0%,#1a0533 100%)}
+    .universe-text{background:rgba(255,255,255,.06);border-radius:20px;
+      padding:24px;max-width:340px;text-align:center;margin-bottom:20px}
+    .universe-text h2{color:#fff;font-size:18px;font-weight:800;margin-bottom:10px}
+    .universe-text p{color:rgba(255,255,255,.7);font-size:14px;line-height:1.7}
+    .stars-bg{position:absolute;inset:0;pointer-events:none}
+
+    /* ============================
+       SLIDE 2 — GALLERY
+    ============================= */
+    #s2{background:#0d0d0d}
+    .gallery-header{text-align:center;margin-bottom:16px}
+    .gallery-header h2{color:#fff;font-size:18px;font-weight:800;margin-bottom:6px}
+    .gallery-header p{color:rgba(255,255,255,.5);font-size:13px}
+    .polaroid-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:320px}
+    .polaroid{background:#fff;padding:8px 8px 28px;border-radius:4px;
+      box-shadow:0 4px 20px rgba(0,0,0,.4);
+      transform:rotate(var(--rot));transition:.3s}
+    .polaroid:hover{transform:rotate(0) scale(1.05);z-index:2}
+    .polaroid-img{width:100%;aspect-ratio:1;border-radius:2px;
+      display:flex;align-items:center;justify-content:center;font-size:36px;
+      background:var(--bg)}
+    .polaroid-caption{font-size:9px;color:#333;text-align:center;
+      margin-top:6px;font-family:Georgia,serif}
+
+    /* ============================
+       SLIDE 3 — TIMELINE
+    ============================= */
+    #s3{background:linear-gradient(160deg,#0d0d1a,#1a0533)}
+    .tl{display:flex;flex-direction:column;gap:0;max-width:320px;width:100%}
+    .tl-item{display:flex;gap:12px;align-items:flex-start}
+    .tl-line{display:flex;flex-direction:column;align-items:center;width:16px;flex-shrink:0}
+    .tl-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;
+      border:2px solid rgba(255,255,255,.2);margin-top:2px}
+    .tl-vert{width:1.5px;flex:1;min-height:20px;background:rgba(255,255,255,.1)}
+    .tl-content{flex:1;padding-bottom:16px}
+    .tl-date{font-size:10px;font-weight:700;margin-bottom:4px}
+    .tl-card{background:rgba(255,255,255,.07);border-radius:12px;padding:10px 12px}
+    .tl-card h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:3px}
+    .tl-card p{color:rgba(255,255,255,.55);font-size:11px;line-height:1.5}
+
+    /* ============================
+       SLIDE 4 — STAR MAP
+    ============================= */
+    #s4{background:radial-gradient(ellipse at center,#06062a 0%,#020210 100%)}
+    .star-map-wrap{display:flex;flex-direction:column;align-items:center}
+    .star-circle{width:220px;height:220px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);position:relative;overflow:hidden;
+      background:radial-gradient(ellipse,#0a0a30,#020210)}
+    .star-quote{color:#fff;font-size:14px;font-style:italic;text-align:center;
+      max-width:300px;line-height:1.6;margin:16px 0 8px}
+    .star-coords{color:rgba(255,255,255,.35);font-size:11px;text-align:center;letter-spacing:.5px}
+
+    /* ============================
+       SLIDE 5 — WORD GAME
+    ============================= */
+    #s5{background:#111}
+    .wg-title{color:#fff;font-size:18px;font-weight:800;text-align:center;margin-bottom:4px;line-height:1.3}
+    .wg-hint{color:rgba(255,255,255,.45);font-size:12px;text-align:center;margin-bottom:16px}
+    .wg-grid{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+    .wg-row{display:flex;gap:4px;justify-content:center}
+    .wg-cell{width:44px;height:44px;border:2px solid rgba(255,255,255,.2);
+      border-radius:6px;display:flex;align-items:center;justify-content:center;
+      font-size:18px;font-weight:900;color:#fff;transition:.3s;
+      text-transform:uppercase;background:transparent}
+    .wg-cell.correct{background:#10B981;border-color:#10B981}
+    .wg-cell.present{background:#F59E0B;border-color:#F59E0B}
+    .wg-cell.absent{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.12)}
+    .wg-cell.active-row{border-color:rgba(255,255,255,.5)}
+    .wg-cell.filled{border-color:rgba(255,255,255,.6)}
+    .wg-key-row{display:flex;gap:3px;justify-content:center;margin-bottom:3px}
+    .wg-key{height:36px;min-width:26px;padding:0 4px;background:rgba(255,255,255,.15);
+      border-radius:5px;display:flex;align-items:center;justify-content:center;
+      font-size:10px;font-weight:700;color:#fff;cursor:pointer;border:none;transition:.25s;
+      user-select:none}
+    .wg-key:hover{background:rgba(255,255,255,.28)}
+    .wg-key.correct-key{background:#10B981}
+    .wg-key.present-key{background:#F59E0B}
+    .wg-key.absent-key{background:rgba(255,255,255,.06)}
+    .wg-key.wide{min-width:40px;font-size:8px}
+    .wg-msg{color:#fff;font-size:13px;font-weight:700;text-align:center;
+      min-height:20px;margin-bottom:6px}
+    .wg-celebrate{font-size:28px;text-align:center;animation:bounce .5s ease infinite alternate}
+    @keyframes bounce{from{transform:scale(1)}to{transform:scale(1.2)}}
+
+    /* ============================
+       SLIDE 6 — MAP JOURNEY
+    ============================= */
+    #s6{background:#0d1a2d}
+    .map-box{width:100%;max-width:340px;background:#1a2a3a;border-radius:20px;
+      overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+    .map-title-bar{padding:12px 16px;background:#1a3a4a;
+      border-bottom:1px solid rgba(255,255,255,.08)}
+    .map-title-bar h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:2px}
+    .map-title-bar p{color:rgba(255,255,255,.45);font-size:11px}
+    .map-svg-wrap{width:100%;height:200px;position:relative}
+    .map-places{padding:10px 14px;display:flex;flex-direction:column;gap:8px}
+    .map-place{display:flex;align-items:center;gap:10px}
+    .map-place-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .map-place-name{color:#fff;font-size:12px;font-weight:600}
+    .map-place-desc{color:rgba(255,255,255,.45);font-size:10px}
+
+    /* ============================
+       SLIDE 7 — SPIN WHEEL
+    ============================= */
+    #s7{background:#0d0d0d}
+    .spin-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .spin-title-h{color:#fff;font-size:18px;font-weight:800;text-align:center;line-height:1.3;margin-bottom:4px}
+    .wheel-container{position:relative;width:220px;height:220px}
+    #wheel-canvas{border-radius:50%;box-shadow:0 0 30px rgba(124,58,237,.3)}
+    .wheel-arrow{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+      font-size:24px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+    .wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:28px;height:28px;background:#0d0d0d;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;font-size:14px;z-index:5}
+    .spin-btn{background:linear-gradient(135deg,var(--p),#9F67FF);color:#fff;
+      border:none;padding:12px 36px;border-radius:100px;font-size:15px;font-weight:700;
+      cursor:pointer;transition:.3s;box-shadow:0 6px 24px rgba(124,58,237,.4)}
+    .spin-btn:hover{transform:translateY(-2px)}
+    .spin-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .spin-result{color:#fff;font-size:16px;font-weight:800;text-align:center;
+      min-height:24px;transition:.3s}
+
+    /* ============================
+       SLIDE 8 — MOON
+    ============================= */
+    #s8{background:radial-gradient(ellipse at 30% 30%,#0a0a30,#020210)}
+    .moon-scene{display:flex;flex-direction:column;align-items:center}
+    .moon-svg-wrap{margin:16px 0;filter:drop-shadow(0 0 30px rgba(200,190,170,.2))}
+    .moon-fact{background:rgba(255,255,255,.06);border-radius:16px;padding:16px 20px;
+      max-width:300px;text-align:center}
+    .moon-fact h3{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
+    .moon-fact p{color:rgba(255,255,255,.55);font-size:13px;line-height:1.65}
+
+    /* ============================
+       SLIDE 9 — ACHIEVEMENTS
+    ============================= */
+    #s9{background:linear-gradient(160deg,#0d0d0d,#1a0a1a)}
+    .ach-label{color:rgba(255,255,255,.4);font-size:10px;font-weight:700;
+      letter-spacing:2px;border:1px solid rgba(255,255,255,.15);padding:3px 12px;
+      border-radius:100px;margin-bottom:16px;text-transform:uppercase}
+    .ach-card{border:2px solid var(--gold);border-radius:20px;padding:20px;
+      max-width:280px;width:100%;background:rgba(245,158,11,.05);
+      box-shadow:0 0 40px rgba(245,158,11,.15)}
+    .ach-card-header{display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:12px}
+    .ach-brand{color:rgba(245,158,11,.6);font-size:9px;font-weight:700;letter-spacing:1px}
+    .ach-stars{color:var(--gold);font-size:12px}
+    .ach-photo{background:linear-gradient(135deg,#1a0533,#0d1a33);border-radius:10px;
+      height:90px;display:flex;align-items:center;justify-content:center;
+      font-size:52px;margin-bottom:12px}
+    .ach-name-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+    .ach-crown{font-size:14px}
+    .ach-name{color:#fff;font-size:14px;font-weight:800}
+    .ach-days{background:var(--gold);color:#000;font-size:10px;font-weight:700;
+      padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:8px}
+    .ach-desc{color:rgba(255,255,255,.5);font-size:11px;line-height:1.5}
+    .ach-progress{display:flex;align-items:center;justify-content:space-between;
+      margin-top:10px}
+    .ach-prog-label{color:var(--gold);font-size:9px;font-weight:700}
+    .ach-prog-bar{flex:1;height:4px;background:rgba(255,255,255,.1);
+      border-radius:4px;margin:0 8px;overflow:hidden}
+    .ach-prog-fill{height:100%;background:var(--gold);border-radius:4px}
+    .ach-prog-val{color:rgba(245,158,11,.6);font-size:9px}
+
+    /* ============================
+       SLIDE 10 — FINAL LETTER
+    ============================= */
+    #s10{background:linear-gradient(160deg,#0d0320 0%,#1a0533 60%,#0d0d0d 100%)}
+    .letter-wrap{background:rgba(255,255,255,.06);border-radius:24px;
+      padding:28px 24px;max-width:340px;text-align:center;
+      border:1px solid rgba(255,255,255,.1)}
+    .letter-emoji{font-size:48px;margin-bottom:12px}
+    .letter-to{color:rgba(255,255,255,.5);font-size:12px;margin-bottom:4px}
+    .letter-name{color:#fff;font-size:22px;font-weight:900;margin-bottom:16px}
+    .letter-text{color:rgba(255,255,255,.8);font-size:14px;line-height:1.8;
+      font-style:italic;margin-bottom:20px}
+    .letter-from{color:rgba(255,255,255,.4);font-size:12px;margin-bottom:4px}
+    .letter-sig{color:var(--p);font-size:18px;font-weight:800}
+    .letter-hearts{font-size:28px;margin-top:16px;animation:heartbeat 1.5s ease-in-out infinite}
+    @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    .share-btn{margin-top:20px;background:linear-gradient(135deg,var(--p),#9F67FF);
+      color:#fff;border:none;padding:12px 32px;border-radius:100px;
+      font-size:14px;font-weight:700;cursor:pointer;transition:.3s;
+      box-shadow:0 6px 24px rgba(124,58,237,.4)}
+    .share-btn:hover{transform:translateY(-2px)}
+
+    /* ===== CONFETTI ===== */
+    .confetti-piece{position:fixed;top:-10px;border-radius:2px;
+      animation:confettiFall linear forwards;pointer-events:none;z-index:200}
+    @keyframes confettiFall{
+      0%{transform:translateY(0) rotate(0deg);opacity:1}
+      100%{transform:translateY(110vh) rotate(720deg);opacity:.3}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="prog-bar"></div>
+
+<!-- Top bar -->
+<div id="top-bar">
+  <div class="top-title" id="slide-title">Abelhudinhos 💜</div>
+  <button class="sound-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
+</div>
+
+<!-- Navigation zones -->
+<div id="nav-left" onclick="prevSlide()"></div>
+<div id="nav-right" onclick="nextSlide()"></div>
+
+<!-- ===== SLIDES ===== -->
+<div id="slides">
+
+  <!-- SLIDE 0: COVER -->
+  <div class="slide active" id="s0">
+    <div class="cover-particles" id="particles"></div>
+    <div class="cover-emoji">💜</div>
+    <div class="cover-names">Para <span>Você</span></div>
+    <div class="cover-since">com todo meu amor • desde sempre</div>
+    <div class="cover-msg">"Você é o meu lugar favorito no mundo. Essa página é nossa, para guardar cada momento especial da nossa história."</div>
+    <button class="next-btn" onclick="nextSlide()">Começar ✨</button>
+  </div>
+
+  <!-- SLIDE 1: OUR UNIVERSE -->
+  <div class="slide" id="s1">
+    <!-- Animated starfield -->
+    <div class="stars-bg" id="stars-bg"></div>
+    <div class="label">Nosso Universo Particular</div>
+    <div class="universe-text">
+      <h2>Nós dois contra o mundo 🌍</h2>
+      <p>Em cada olhar seu, encontro o universo inteiro. Você transformou a minha vida de uma forma que as palavras nunca conseguirão descrever completamente.</p>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:10px 16px;text-align:center">
+        <div style="color:#9F67FF;font-size:18px;font-weight:900" id="days-count">...</div>
+        <div style="color:rgba(255,255,255,.5);font-size:11px">dias juntos</div>
+      </div>
+      <div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:12px;padding:10px 16px;text-align:center">
+        <div style="color:#EC4899;font-size:18px;font-weight:900">∞</div>
+        <div style="color:rgba(255,255,255,.5);font-size:11px">amor</div>
+      </div>
+      <div style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:10px 16px;text-align:center">
+        <div style="color:#F59E0B;font-size:18px;font-weight:900">1</div>
+        <div style="color:rgba(255,255,255,.5);font-size:11px">grande amor</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 2: PHOTO GALLERY -->
+  <div class="slide" id="s2">
+    <div class="gallery-header">
+      <h2>Nossa Galeria 📸</h2>
+      <p>Os momentos mais lindos da nossa história</p>
+    </div>
+    <div class="polaroid-grid">
+      <div class="polaroid" style="--rot:-3deg">
+        <div class="polaroid-img" style="background:linear-gradient(135deg,#2d1b4e,#4e1b2d);--bg:#2d1b4e">🌅</div>
+        <div class="polaroid-caption">Nosso pôr do sol</div>
+      </div>
+      <div class="polaroid" style="--rot:2deg">
+        <div class="polaroid-img" style="background:linear-gradient(135deg,#1b2d4e,#2d4e1b)">🌊</div>
+        <div class="polaroid-caption">A viagem inesquecível</div>
+      </div>
+      <div class="polaroid" style="--rot:4deg">
+        <div class="polaroid-img" style="background:linear-gradient(135deg,#4e1b1b,#1b4e3d)">🍕</div>
+        <div class="polaroid-caption">Nosso jantar especial</div>
+      </div>
+      <div class="polaroid" style="--rot:-2deg">
+        <div class="polaroid-img" style="background:linear-gradient(135deg,#1b3d4e,#3d1b4e)">💑</div>
+        <div class="polaroid-caption">Sempre juntos 💜</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 3: TIMELINE -->
+  <div class="slide" id="s3">
+    <div class="label" style="margin-bottom:16px">Nossa Jornada</div>
+    <div class="tl" id="tl-list">
+      <!-- JS will populate -->
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 4: STAR MAP -->
+  <div class="slide" id="s4">
+    <div class="star-map-wrap">
+      <div class="label">Mapa das Estrelas</div>
+      <div class="star-circle" id="star-map-circle">
+        <svg id="star-svg" width="220" height="220" viewBox="0 0 220 220" style="display:block"></svg>
+      </div>
+      <div class="star-quote">"O céu quando nossos mundos se colidiram 💫"</div>
+      <div class="star-coords">PIRES DO RIO, GO, BRASIL<br>30 DE DEZEMBRO DE 2020 · 22:00<br>17.3492°S 48.3935°W</div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 5: WORD GAME -->
+  <div class="slide" id="s5">
+    <div class="wg-title" id="wg-heading">O que mais gosto em você</div>
+    <div class="wg-hint">Descubra a palavra secreta (5 letras)</div>
+    <div class="wg-msg" id="wg-msg"></div>
+    <div class="wg-grid" id="wg-grid"></div>
+    <div id="wg-keyboard"></div>
+    <div class="wg-celebrate" id="wg-celebrate" style="display:none">🎉💜🎉</div>
+    <button class="next-btn" id="wg-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 6: MAP JOURNEY -->
+  <div class="slide" id="s6">
+    <div class="label">Nossa Jornada no Mapa</div>
+    <div class="map-box">
+      <div class="map-title-bar">
+        <h3>Nossa Jornada no Mapa 🗺️</h3>
+        <p>Lugares que marcaram nossa história</p>
+      </div>
+      <div class="map-svg-wrap">
+        <svg width="100%" height="200" viewBox="0 0 340 200" style="display:block">
+          <!-- Background -->
+          <rect width="340" height="200" fill="#2a3a5a"/>
+          <!-- Water area -->
+          <rect x="0" y="130" width="340" height="70" fill="#1a3a6a" opacity=".7"/>
+          <!-- Land -->
+          <path d="M0 0 L340 0 L340 130 Q300 120 270 125 Q230 132 200 125 Q160 118 130 126 Q90 133 60 126 Q30 120 0 128 Z" fill="#3a5a3a"/>
+          <path d="M60 60 Q130 48 200 60 Q260 70 310 55 L340 80 Q310 100 270 98 Q200 95 130 98 Q80 100 60 95 Z" fill="#4a6a3a" opacity=".6"/>
+          <!-- Grid lines -->
+          <line x1="170" y1="0" x2="170" y2="200" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="0" y1="100" x2="340" y2="100" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
+          <!-- Heart pins with labels -->
+          <text x="168" y="80" font-size="18" text-anchor="middle">💚</text>
+          <text x="168" y="65" font-size="8" fill="white" text-anchor="middle" opacity=".9" font-weight="600">Nos conhecemos aqui</text>
+          <text x="80" y="110" font-size="16" text-anchor="middle">💜</text>
+          <text x="80" y="126" font-size="7" fill="white" text-anchor="middle" opacity=".8">1º encontro</text>
+          <text x="280" y="70" font-size="16" text-anchor="middle">💜</text>
+          <text x="280" y="86" font-size="7" fill="white" text-anchor="middle" opacity=".8">Nossa viagem</text>
+          <text x="220" y="105" font-size="14" text-anchor="middle">💜</text>
+          <text x="220" y="120" font-size="7" fill="white" text-anchor="middle" opacity=".8">Lugar favorito</text>
+          <!-- Dashed paths between pins -->
+          <path d="M168 78 Q120 90 80 108" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+          <path d="M168 78 Q220 72 280 68" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+          <path d="M168 78 Q194 90 220 103" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 7: SPIN WHEEL -->
+  <div class="slide" id="s7">
+    <div class="spin-wrap">
+      <div class="spin-title-h">Para onde vamos<br>sair Hoje? 🎡</div>
+      <div class="wheel-container">
+        <div class="wheel-arrow">▼</div>
+        <canvas id="wheel-canvas" width="220" height="220"></canvas>
+        <div class="wheel-center">❤️</div>
+      </div>
+      <div class="spin-result" id="spin-result"></div>
+      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">Girar Roleta 🎲</button>
+    </div>
+    <button class="next-btn" id="spin-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 8: MOON CURIOSITY -->
+  <div class="slide" id="s8">
+    <div class="moon-scene">
+      <div class="label">Curiosidades</div>
+      <div class="big-title" style="font-size:18px;max-width:280px">Nos conhecemos sob<br>o brilho da lua 🌙</div>
+      <div class="moon-svg-wrap">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <defs>
+            <radialGradient id="mg" cx="38%" cy="32%" r="65%">
+              <stop offset="0%" stop-color="#f8f4ec"/>
+              <stop offset="60%" stop-color="#e0d8c8"/>
+              <stop offset="100%" stop-color="#c0b8a8"/>
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Glow -->
+          <circle cx="70" cy="70" r="66" fill="rgba(200,190,170,0.08)" filter="url(#glow)"/>
+          <!-- Moon body -->
+          <circle cx="70" cy="70" r="62" fill="url(#mg)"/>
+          <!-- Craters -->
+          <circle cx="45" cy="52" r="9" fill="rgba(0,0,0,.07)"/>
+          <circle cx="88" cy="78" r="7" fill="rgba(0,0,0,.06)"/>
+          <circle cx="60" cy="92" r="6" fill="rgba(0,0,0,.07)"/>
+          <circle cx="95" cy="48" r="5" fill="rgba(0,0,0,.05)"/>
+          <circle cx="52" cy="72" r="3" fill="rgba(0,0,0,.04)"/>
+        </svg>
+      </div>
+      <div class="moon-fact">
+        <h3>Lua Cheia 🌕</h3>
+        <p>Na noite de 30 de Dezembro de 2020, o céu estava iluminado por uma Lua Cheia. Um sinal de que algo especial estava prestes a acontecer.</p>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 9: ACHIEVEMENTS -->
+  <div class="slide" id="s9">
+    <div class="ach-label">Conquista Desbloqueada</div>
+    <div class="ach-card" id="ach-card">
+      <div class="ach-card-header">
+        <div class="ach-brand">✦ ABELHUDINHOS WRAPPED</div>
+        <div class="ach-stars">★★★★★</div>
+      </div>
+      <div class="ach-photo">💑</div>
+      <div class="ach-name-row">
+        <div class="ach-crown">👑</div>
+        <div class="ach-name" id="ach-time-title">1 Ano Juntos</div>
+      </div>
+      <div class="ach-days" id="ach-days-text">365 DIAS JUNTOS</div>
+      <div class="ach-desc" id="ach-desc-text">Um ano de amor, risadas, cumplicidade e crescimento. Vocês continuam escolhendo um ao outro todos os dias. Isso é lendário!</div>
+      <div class="ach-progress">
+        <div class="ach-prog-label">LENDÁRIO</div>
+        <div class="ach-prog-bar"><div class="ach-prog-fill" id="ach-prog" style="width:75%"></div></div>
+        <div class="ach-prog-val" id="ach-prog-val">75%</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 10: FINAL LETTER -->
+  <div class="slide" id="s10">
+    <div class="letter-wrap">
+      <div class="letter-emoji">💜</div>
+      <div class="letter-to">Para</div>
+      <div class="letter-name">Meu Grande Amor</div>
+      <div class="letter-text">
+        "Obrigado por cada sorriso, cada abraço e cada momento que fazem a minha vida ser completa. Você é a melhor parte de todos os meus dias. Eu te amo hoje, amanhã e sempre."
+      </div>
+      <div class="letter-from">Com todo meu amor,</div>
+      <div class="letter-sig">Seu Amor 💜</div>
+      <div class="letter-hearts">💜💜💜</div>
+      <button class="share-btn" onclick="sharePresente()">Compartilhar este presente 🎁</button>
+    </div>
+    <div class="watermark" style="bottom:16px">abelhudinhos.com.br — Privado</div>
+  </div>
+
+</div><!-- end slides -->
+
+<script>
+// ===== CONFIG =====
+var CONFIG = {
+  coupleName: 'Abelhudinhos',
+  person1: 'Você',
+  startDate: new Date('2022-06-01'), // Update this date!
+  secretWord: 'LINDA',              // Update this word!
+  wordHint: '(5 letras)',
+  wordDescription: 'O que você é para mim',
+  timelineEvents: [
+    {date:'Maio 2022',title:'O início de tudo 💌',desc:'Quando enviei a primeira mensagem sem saber que mudaria minha vida para sempre.',color:'#9F67FF'},
+    {date:'Junho 2022',title:'Primeiro encontro ❤️',desc:'O dia que vi você de perto pela primeira vez e soube que era especial.',color:'#EC4899'},
+    {date:'Agosto 2022',title:'Ficamos juntos 🥂',desc:'O dia mais feliz: quando você disse sim e começamos nossa história oficial.',color:'#F59E0B'},
+    {date:'Dezembro 2022',title:'Primeira viagem ✈️',desc:'Aventura nova, mas com você ao lado tudo faz sentido.',color:'#10B981'},
+    {date:'Hoje',title:'Apaixonado(a) para sempre 💜',desc:'Cada dia ao seu lado é um presente.',color:'#60A5FA'},
+  ],
+  achievementTitle: '1 Ano Juntos',
+  achievementDesc: 'Um ano de amor, risadas, cumplicidade e crescimento. Vocês continuam escolhendo um ao outro todos os dias. Isso é lendário!',
+  spinOptions: ['Cinema 🎬','Sushi 🍣','Parque 🌳','Restaurante 🍽️','Shopping 🛍️','Motel 🏨','Praia 🏖️','Churrasco 🥩'],
+};
+
+// ===== SLIDES =====
+var TOTAL = 11;
+var cur = 0;
+var muted = false;
+var progressTimer = null;
+var SLIDE_DURATION = 8000; // ms per slide auto-advance
+var progressElapsed = 0;
+var progressInterval = null;
+
+// Build progress bar segments
+function buildProgBar() {
+  var bar = document.getElementById('prog-bar');
+  bar.innerHTML = '';
+  for (var i = 0; i < TOTAL; i++) {
+    var seg = document.createElement('div');
+    seg.className = 'prog-seg';
+    var fill = document.createElement('div');
+    fill.className = 'prog-fill';
+    seg.appendChild(fill);
+    bar.appendChild(seg);
+  }
+}
+
+function updateProgBar() {
+  var segs = document.querySelectorAll('.prog-seg');
+  segs.forEach(function(seg, i) {
+    var fill = seg.querySelector('.prog-fill');
+    if (i < cur) {
+      fill.style.width = '100%';
+      fill.style.transition = 'none';
+    } else if (i === cur) {
+      fill.style.width = (progressElapsed / SLIDE_DURATION * 100) + '%';
+    } else {
+      fill.style.width = '0%';
+      fill.style.transition = 'none';
+    }
+  });
+}
+
+function startProgress() {
+  stopProgress();
+  progressElapsed = 0;
+  var TICK = 100;
+  progressInterval = setInterval(function() {
+    progressElapsed += TICK;
+    updateProgBar();
+    if (progressElapsed >= SLIDE_DURATION) {
+      stopProgress();
+      // Auto-advance only for non-interactive slides
+      if (cur !== 5 && cur !== 7) nextSlide();
+    }
+  }, TICK);
+}
+
+function stopProgress() {
+  if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+}
+
+function goSlide(n) {
+  if (n < 0 || n >= TOTAL) return;
+  var slides = document.querySelectorAll('.slide');
+  slides[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  updateTopBar();
+  startProgress();
+  onSlideEnter(cur);
+}
+
+function nextSlide() { if (cur < TOTAL - 1) goSlide(cur + 1); }
+function prevSlide() { if (cur > 0) goSlide(cur - 1); }
+
+var titles = [
+  'Abelhudinhos 💜','Nosso Universo','Nossa Galeria','Nossa Jornada',
+  'Mapa das Estrelas','Jogo de Palavras','Jornada no Mapa',
+  'Roleta Surpresa','Curiosidades','Conquistas','Carta Final'
+];
+function updateTopBar() {
+  document.getElementById('slide-title').textContent = titles[cur] || 'Abelhudinhos';
+}
+
+function toggleSound() {
+  muted = !muted;
+  document.getElementById('sound-btn').textContent = muted ? '🔇' : '🔊';
+}
+
+// ===== SLIDE ENTER ACTIONS =====
+function onSlideEnter(n) {
+  if (n === 0) initCover();
+  if (n === 1) initUniverse();
+  if (n === 3) initTimeline();
+  if (n === 4) initStarMap();
+  if (n === 5 && !wgInitialized) initWordGame();
+  if (n === 7) initSpinWheel();
+}
+
+// ===== COVER =====
+function initCover() {
+  var p = document.getElementById('particles');
+  if (p.children.length > 0) return;
+  var colors = ['#9F67FF','#EC4899','#F59E0B','#60A5FA','#10B981'];
+  for (var i = 0; i < 20; i++) {
+    var el = document.createElement('div');
+    el.className = 'particle';
+    el.style.cssText = [
+      'left:' + Math.random()*100 + '%',
+      'width:' + (Math.random()*4+2) + 'px',
+      'height:' + (Math.random()*4+2) + 'px',
+      'background:' + colors[Math.floor(Math.random()*colors.length)],
+      'animation-duration:' + (Math.random()*8+6) + 's',
+      'animation-delay:' + (Math.random()*5) + 's',
+      'opacity:0',
+    ].join(';');
+    p.appendChild(el);
+  }
+}
+
+// ===== UNIVERSE =====
+function initUniverse() {
+  // Calc days
+  var days = Math.floor((new Date() - CONFIG.startDate) / (1000*60*60*24));
+  document.getElementById('days-count').textContent = days.toLocaleString('pt-BR');
+  // Stars
+  var bg = document.getElementById('stars-bg');
+  if (bg.children.length > 0) return;
+  for (var i = 0; i < 80; i++) {
+    var star = document.createElement('div');
+    star.style.cssText = [
+      'position:absolute',
+      'top:' + Math.random()*100 + '%',
+      'left:' + Math.random()*100 + '%',
+      'width:' + (Math.random()*2+1) + 'px',
+      'height:' + (Math.random()*2+1) + 'px',
+      'background:#fff',
+      'border-radius:50%',
+      'opacity:' + (Math.random()*.7+.1),
+      'animation:twinkle ' + (Math.random()*3+2) + 's ease-in-out infinite',
+      'animation-delay:' + (Math.random()*3) + 's',
+    ].join(';');
+    bg.appendChild(star);
+  }
+  // Add twinkle keyframes if not present
+  if (!document.getElementById('twinkle-style')) {
+    var s = document.createElement('style');
+    s.id = 'twinkle-style';
+    s.textContent = '@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}';
+    document.head.appendChild(s);
+  }
+}
+
+// ===== TIMELINE =====
+function initTimeline() {
+  var list = document.getElementById('tl-list');
+  if (list.innerHTML.trim() !== '') return;
+  CONFIG.timelineEvents.forEach(function(ev, i) {
+    var isLast = i === CONFIG.timelineEvents.length - 1;
+    list.innerHTML += `
+      <div class="tl-item">
+        <div class="tl-line">
+          <div class="tl-dot" style="background:${ev.color};border-color:${ev.color}"></div>
+          ${!isLast ? '<div class="tl-vert"></div>' : ''}
+        </div>
+        <div class="tl-content">
+          <div class="tl-date" style="color:${ev.color}">${ev.date}</div>
+          <div class="tl-card">
+            <h4>${ev.title}</h4>
+            <p>${ev.desc}</p>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+// ===== STAR MAP =====
+function initStarMap() {
+  var svg = document.getElementById('star-svg');
+  if (svg.innerHTML.trim() !== '') return;
+  var W = 220, H = 220, CX = 110, CY = 110, R = 105;
+  var html = '';
+  // Background gradient
+  html += `<defs>
+    <radialGradient id="smg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d1240"/>
+      <stop offset="100%" stop-color="#020210"/>
+    </radialGradient>
+    <clipPath id="smclip"><circle cx="${CX}" cy="${CY}" r="${R}"/></clipPath>
+  </defs>`;
+  html += `<circle cx="${CX}" cy="${CY}" r="${R}" fill="url(#smg)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>`;
+  // Stars
+  var seed = 42;
+  function rand() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  for (var i = 0; i < 120; i++) {
+    var angle = rand() * Math.PI * 2;
+    var dist = Math.sqrt(rand()) * R * 0.95;
+    var x = CX + dist * Math.cos(angle);
+    var y = CY + dist * Math.sin(angle);
+    var r = rand() * 1.4 + 0.3;
+    var op = rand() * 0.7 + 0.3;
+    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="white" opacity="${op.toFixed(2)}" clip-path="url(#smclip)"/>`;
+  }
+  // Constellation — Big Dipper style
+  var pts = [
+    [80,75],[95,68],[112,72],[128,68],
+    [130,85],[118,94],[102,90]
+  ];
+  for (var j = 0; j < pts.length - 1; j++) {
+    html += `<line x1="${pts[j][0]}" y1="${pts[j][1]}" x2="${pts[j+1][0]}" y2="${pts[j+1][1]}" stroke="rgba(159,103,255,0.6)" stroke-width="1" clip-path="url(#smclip)"/>`;
+  }
+  pts.forEach(function(p) {
+    html += `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#9F67FF" clip-path="url(#smclip)"/>`;
+    html += `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="rgba(159,103,255,0.2)" clip-path="url(#smclip)"/>`;
+  });
+  // Secondary constellation
+  var pts2 = [[150,120],[162,108],[175,115],[170,130],[155,135]];
+  for (var k = 0; k < pts2.length - 1; k++) {
+    html += `<line x1="${pts2[k][0]}" y1="${pts2[k][1]}" x2="${pts2[k+1][0]}" y2="${pts2[k+1][1]}" stroke="rgba(236,72,153,0.5)" stroke-width="0.8" clip-path="url(#smclip)"/>`;
+  }
+  pts2.forEach(function(p) {
+    html += `<circle cx="${p[0]}" cy="${p[1]}" r="2" fill="#EC4899" clip-path="url(#smclip)"/>`;
+  });
+  // Cross marker in center
+  html += `<line x1="${CX-8}" y1="${CY}" x2="${CX+8}" y2="${CY}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
+  html += `<line x1="${CX}" y1="${CY-8}" x2="${CX}" y2="${CY+8}" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
+  svg.innerHTML = html;
+}
+
+// ===== WORD GAME =====
+var wgInitialized = false;
+var wgWord = '';
+var wgGuesses = [];
+var wgCurrentGuess = '';
+var wgMaxGuesses = 6;
+var wgWon = false;
+var wgLost = false;
+var wgKeyStatus = {};
+
+function initWordGame() {
+  wgInitialized = true;
+  wgWord = CONFIG.secretWord.toUpperCase();
+  document.getElementById('wg-heading').textContent = CONFIG.wordDescription;
+  document.getElementById('wg-hint').textContent = CONFIG.wordHint;
+  renderWGGrid();
+  renderWGKeyboard();
+}
+
+function renderWGGrid() {
+  var grid = document.getElementById('wg-grid');
+  grid.innerHTML = '';
+  for (var r = 0; r < wgMaxGuesses; r++) {
+    var row = document.createElement('div');
+    row.className = 'wg-row';
+    for (var c = 0; c < wgWord.length; c++) {
+      var cell = document.createElement('div');
+      cell.className = 'wg-cell';
+      cell.id = 'wg-' + r + '-' + c;
+      // Fill past guesses
+      if (r < wgGuesses.length) {
+        var g = wgGuesses[r];
+        cell.textContent = g[c].letter;
+        cell.classList.add(g[c].status);
+      } else if (r === wgGuesses.length && !wgWon && !wgLost) {
+        // Current row
+        if (c < wgCurrentGuess.length) {
+          cell.textContent = wgCurrentGuess[c];
+          cell.classList.add('filled', 'active-row');
+        } else {
+          cell.classList.add('active-row');
+        }
+      }
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+  }
+}
+
+function renderWGKeyboard() {
+  var kb = document.getElementById('wg-keyboard');
+  var rows = [
+    ['Q','W','E','R','T','Y','U','I','O','P'],
+    ['A','S','D','F','G','H','J','K','L'],
+    ['ENTER','Z','X','C','V','B','N','M','⌫']
+  ];
+  kb.innerHTML = '';
+  rows.forEach(function(row) {
+    var rowEl = document.createElement('div');
+    rowEl.className = 'wg-key-row';
+    row.forEach(function(key) {
+      var btn = document.createElement('button');
+      btn.className = 'wg-key' + (key.length > 1 ? ' wide' : '');
+      btn.textContent = key;
+      if (wgKeyStatus[key]) btn.classList.add(wgKeyStatus[key] + '-key');
+      btn.onclick = function() { handleWGKey(key); };
+      rowEl.appendChild(btn);
+    });
+    kb.appendChild(rowEl);
+  });
+}
+
+function handleWGKey(key) {
+  if (wgWon || wgLost) return;
+  if (key === '⌫') {
+    wgCurrentGuess = wgCurrentGuess.slice(0, -1);
+  } else if (key === 'ENTER') {
+    if (wgCurrentGuess.length === wgWord.length) submitWGGuess();
+    else showWGMsg('Palavra muito curta!');
+    return;
+  } else if (key.length === 1 && wgCurrentGuess.length < wgWord.length) {
+    wgCurrentGuess += key;
+  }
+  renderWGGrid();
+}
+
+function submitWGGuess() {
+  var guess = wgCurrentGuess;
+  var result = [];
+  var wordArr = wgWord.split('');
+  var guessArr = guess.split('');
+  var used = wordArr.map(function() { return false; });
+  // First pass: correct
+  guessArr.forEach(function(l, i) {
+    if (l === wordArr[i]) {
+      result[i] = {letter: l, status: 'correct'};
+      used[i] = true;
+    } else {
+      result[i] = {letter: l, status: 'absent'};
+    }
+  });
+  // Second pass: present
+  guessArr.forEach(function(l, i) {
+    if (result[i].status === 'correct') return;
+    var idx = wordArr.findIndex(function(wl, wi) { return wl === l && !used[wi]; });
+    if (idx !== -1) {
+      result[i].status = 'present';
+      used[idx] = true;
+    }
+  });
+  wgGuesses.push(result);
+  // Update key status
+  result.forEach(function(r) {
+    var cur = wgKeyStatus[r.letter];
+    if (r.status === 'correct' || (!cur && r.status === 'present') || (!cur && r.status === 'absent')) {
+      if (cur !== 'correct') wgKeyStatus[r.letter] = r.status;
+    }
+  });
+  wgCurrentGuess = '';
+  renderWGGrid();
+  renderWGKeyboard();
+  // Check win/lose
+  if (result.every(function(r) { return r.status === 'correct'; })) {
+    wgWon = true;
+    showWGMsg('Você acertou! 💜 Era ' + wgWord + '!');
+    document.getElementById('wg-celebrate').style.display = 'block';
+    document.getElementById('wg-next').style.display = 'block';
+    stopProgress();
+    launchConfetti();
+  } else if (wgGuesses.length >= wgMaxGuesses) {
+    wgLost = true;
+    showWGMsg('Era: ' + wgWord + ' 💜 Não desiste!');
+    document.getElementById('wg-next').style.display = 'block';
+  }
+}
+
+function showWGMsg(msg) {
+  var el = document.getElementById('wg-msg');
+  el.textContent = msg;
+  setTimeout(function() { if (el.textContent === msg) el.textContent = ''; }, 2500);
+}
+
+// Keyboard input
+document.addEventListener('keydown', function(e) {
+  if (cur !== 5) return;
+  if (e.key === 'Enter') handleWGKey('ENTER');
+  else if (e.key === 'Backspace') handleWGKey('⌫');
+  else if (/^[a-zA-ZÀ-ú]$/.test(e.key)) handleWGKey(e.key.toUpperCase());
+});
+
+// ===== SPIN WHEEL =====
+var spinInitialized = false;
+var spinning = false;
+var spinAngle = 0;
+
+function initSpinWheel() {
+  if (spinInitialized) return;
+  spinInitialized = true;
+  drawWheel(0);
+}
+
+function drawWheel(angle) {
+  var canvas = document.getElementById('wheel-canvas');
+  var ctx = canvas.getContext('2d');
+  var W = 220, H = 220, CX = 110, CY = 110, R = 106;
+  var opts = CONFIG.spinOptions;
+  var slice = (Math.PI * 2) / opts.length;
+  var colors = ['#f472b6','#e879f9','#c084fc','#a78bfa','#f9a8d4','#fb7185','#fdba74','#a5f3fc'];
+  ctx.clearRect(0, 0, W, H);
+  opts.forEach(function(opt, i) {
+    var start = angle + i * slice - Math.PI / 2;
+    var end = start + slice;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.arc(CX, CY, R, start, end);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.globalAlpha = 0.88;
+    ctx.fill();
+    ctx.strokeStyle = '#0d0d0d';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+    // Label
+    ctx.save();
+    ctx.translate(CX, CY);
+    ctx.rotate(start + slice / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 10px Inter, sans-serif';
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 3;
+    ctx.fillText(opt, R - 6, 4);
+    ctx.restore();
+  });
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(CX, CY, 14, 0, Math.PI * 2);
+  ctx.fillStyle = '#0d0d0d';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spin-btn').disabled = true;
+  document.getElementById('spin-result').textContent = '';
+  stopProgress();
+  var totalSpin = Math.random() * Math.PI * 8 + Math.PI * 6;
+  var duration = 4000;
+  var start = null;
+  var startAngle = spinAngle;
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function animate(ts) {
+    if (!start) start = ts;
+    var elapsed = ts - start;
+    var t = Math.min(elapsed / duration, 1);
+    spinAngle = startAngle + totalSpin * ease(t);
+    drawWheel(spinAngle);
+    if (t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      document.getElementById('spin-btn').disabled = false;
+      // Determine result: arrow points up (angle = -PI/2 from top)
+      var normalAngle = ((spinAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+      var slice = (Math.PI * 2) / CONFIG.spinOptions.length;
+      // Arrow at top = -PI/2, convert to which slice
+      var arrowAngle = (Math.PI / 2 - normalAngle + Math.PI * 4) % (Math.PI * 2);
+      var idx = Math.floor(arrowAngle / slice) % CONFIG.spinOptions.length;
+      var chosen = CONFIG.spinOptions[idx];
+      document.getElementById('spin-result').textContent = '🎯 ' + chosen + '!';
+      document.getElementById('spin-next').style.display = 'block';
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// ===== ACHIEVEMENTS =====
+function initAchievements() {
+  var days = Math.floor((new Date() - CONFIG.startDate) / (1000*60*60*24));
+  var years = Math.floor(days / 365);
+  var months = Math.floor((days % 365) / 30);
+  var title = years > 0 ? years + (years === 1 ? ' Ano' : ' Anos') + ' Juntos' : months + ' Meses Juntos';
+  document.getElementById('ach-time-title').textContent = title;
+  document.getElementById('ach-days-text').textContent = days + ' DIAS JUNTOS';
+  document.getElementById('ach-desc-text').textContent = CONFIG.achievementDesc;
+  var pct = Math.min(100, Math.floor((days / 365) * 25));
+  document.getElementById('ach-prog').style.width = pct + '%';
+  document.getElementById('ach-prog-val').textContent = pct + '%';
+}
+initAchievements();
+
+// ===== CONFETTI =====
+function launchConfetti() {
+  var colors = ['#7C3AED','#EC4899','#F59E0B','#10B981','#60A5FA','#fff'];
+  for (var i = 0; i < 60; i++) {
+    setTimeout(function() {
+      var el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.width = (Math.random() * 8 + 4) + 'px';
+      el.style.height = (Math.random() * 8 + 4) + 'px';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
+      el.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(el);
+      setTimeout(function() { el.remove(); }, 4000);
+    }, i * 30);
+  }
+}
+
+// ===== SHARE =====
+function sharePresente() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Abelhudinhos 💜',
+      text: 'Esse presente é especial, feito com todo o meu amor para você!',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      alert('Link copiado! 💜 Compartilhe com quem você ama!');
+    });
+  }
+}
+
+// ===== INIT =====
+buildProgBar();
+updateTopBar();
+initCover();
+startProgress();
+</script>
+</body>
+</html>
