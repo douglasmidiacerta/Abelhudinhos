@@ -674,6 +674,8 @@
           <circle cx="70" cy="70" r="66" fill="rgba(200,190,170,0.08)" filter="url(#glow)"/>
           <!-- Moon body -->
           <circle cx="70" cy="70" r="62" fill="url(#mg)"/>
+          <!-- Shadow to make it look Waxing Gibbous -->
+          <path d="M 70 8 A 62 62 0 0 0 70 132 A 30 62 0 0 1 70 8" fill="rgba(0,0,0,0.5)" />
           <!-- Craters -->
           <circle cx="45" cy="52" r="9" fill="rgba(0,0,0,.07)"/>
           <circle cx="88" cy="78" r="7" fill="rgba(0,0,0,.06)"/>
@@ -683,8 +685,8 @@
         </svg>
       </div>
       <div class="moon-fact">
-        <h3>Lua Minguante <i data-lucide="moon" style="display:inline-block;vertical-align:-2px;width:14px"></i></h3>
-        <p>Na noite de 29 de Novembro de 2025, em Juatuba, MG, o céu guardava um segredo: duas pessoas prestes a mudar a vida uma da outra para sempre.</p>
+        <h3>Gibosa Crescente <i data-lucide="moon" style="display:inline-block;vertical-align:-2px;width:14px"></i></h3>
+        <p>Na noite de 29 de Novembro de 2025, em Juatuba, MG, a lua estava 68% iluminada, brilhando intensamente para testemunhar o início da nossa história.</p>
       </div>
     </div>
     <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
@@ -1021,31 +1023,34 @@ function initStarMap() {
     html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="white" opacity="${op.toFixed(2)}"/>`;
   }
   
-  // Constellation
+  // Constellation: Orion (The Hunter)
   var pts = [
-    [CX-80, CY-20], [CX-30, CY-40], [CX+20, CY-20], [CX+70, CY-30], [CX+110, CY+10], [CX+130, CY+50],
-    [CX-40, CY+50], [CX-10, CY+90], [CX-70, CY+100], [CX-80, CY+60], [CX-40, CY+50]
+    [CX-40, CY-60], [CX+40, CY-50], // Shoulders: Bellatrix, Betelgeuse
+    [CX-15, CY-10], [CX, CY-12], [CX+15, CY-14], // Belt: Mintaka, Alnilam, Alnitak
+    [CX-35, CY+40], [CX+35, CY+50]  // Feet: Rigel, Saiph
   ];
   
-  // Draw lines with animation
+  // Draw Orion lines
   var linesHtml = '';
-  for (var j = 0; j < pts.length - 1; j++) {
-    if (j === 5) continue; // Skip line connecting the two separate constellation parts
-    var length = Math.hypot(pts[j+1][0] - pts[j][0], pts[j+1][1] - pts[j][1]);
-    linesHtml += `<line x1="${pts[j][0]}" y1="${pts[j][1]}" x2="${pts[j+1][0]}" y2="${pts[j+1][1]}" stroke="rgba(255,255,255,0.6)" stroke-width="1" stroke-dasharray="${length}" stroke-dashoffset="${length}">
-      <animate attributeName="stroke-dashoffset" from="${length}" to="0" dur="1s" begin="${(j>5?j-1:j) * 0.2}s" fill="freeze" />
+  // Torso
+  var connections = [[0,1],[1,4],[4,7],[7,6],[6,3],[3,0],[3,4],[4,5]];
+  connections.forEach(function(c, i) {
+    var p1 = pts[c[0]], p2 = pts[c[1]];
+    var length = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
+    linesHtml += `<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" stroke-dasharray="${length}" stroke-dashoffset="${length}">
+      <animate attributeName="stroke-dashoffset" from="${length}" to="0" dur="0.8s" begin="${i * 0.15}s" fill="freeze" />
     </line>`;
-  }
+  });
   html += linesHtml;
   
   // Draw points
   pts.forEach(function(p, i) {
-    var delay = (i>5?i-1:i) * 0.2;
+    var delay = i * 0.1;
     html += `<circle cx="${p[0]}" cy="${p[1]}" r="0" fill="#fff">
-      <animate attributeName="r" from="0" to="2.5" dur="0.5s" begin="${delay}s" fill="freeze" />
+      <animate attributeName="r" from="0" to="${i < 2 || i > 5 ? 3 : 2}" dur="0.4s" begin="${delay}s" fill="freeze" />
     </circle>`;
     html += `<circle cx="${p[0]}" cy="${p[1]}" r="0" fill="rgba(255,255,255,0.2)">
-      <animate attributeName="r" from="0" to="8" dur="0.5s" begin="${delay}s" fill="freeze" />
+      <animate attributeName="r" from="0" to="8" dur="0.4s" begin="${delay}s" fill="freeze" />
     </circle>`;
   });
   

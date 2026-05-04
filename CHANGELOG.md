@@ -1,5 +1,12 @@
 # Changelog - Abelhudinhos
 
+## [1.9.0] - 2026-05-04
+
+### Precisão Astronômica
+- **Constelação de Órion**: O Mapa das Estrelas foi atualizado para exibir a constelação de Órion, que é um dos marcos mais reconhecíveis do céu brasileiro em Novembro.
+- **Correção da Fase da Lua**: A seção de curiosidades astronômicas foi corrigida de "Lua Minguante" para "Gibosa Crescente" (68% iluminada), refletindo o estado real da lua em 29/11/2025.
+- **Sombra da Lua**: O SVG da lua agora exibe uma sombra dinâmica para representar fielmente a fase gibosa crescente.
+
 ## [1.8.0] - 2026-05-04
 
 ### Corrigido / Finalizado
