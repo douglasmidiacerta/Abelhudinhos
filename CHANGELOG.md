@@ -1,5 +1,17 @@
 # Changelog - Abelhudinhos
 
+## [1.3.0] - 2026-05-04
+
+### Adicionado
+- **Botões de Navegação**: Adicionados botões visíveis de seta ("chevron-left" e "chevron-right") nas bordas da tela no `presente.html` para pular entre os slides facilmente.
+
+### Corrigido e Melhorado
+- **Migração Completa para Lucide SVG**: Todos os emojis nativos foram substituídos definitivamente por ícones Lucide no `index.html` e `presente.html`.
+- **Nossa Jornada**: Corrigido o bug onde a timeline não renderizava devido a falha na lógica de verificação de preenchimento (`children.length > 0`).
+- **Jogo de Palavras**: Removida a condição de corrida (race conditions) causada por timeouts e timeouts desnecessários, resolvendo o bug onde o componente não inicializava.
+- **Mapa Interativo**: Habilitada a interatividade (zoom e pan) no componente de mapa com `Leaflet.js`.
+- **Roleta**: O resultado da roleta agora renderiza corretamente ícones de SVG através de injeção assíncrona (`lucide.createIcons()`).
+
 ## [1.2.0] - 2026-05-03
 
 ### Adicionado

@@ -39,8 +39,15 @@
     .slide.active{opacity:1;pointer-events:auto}
 
     /* ===== NAV ZONES ===== */
-    #nav-left{position:fixed;left:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
-    #nav-right{position:fixed;right:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
+    #nav-left{position:fixed;left:0;top:0;width:25%;height:100%;z-index:50;cursor:pointer}
+    #nav-right{position:fixed;right:0;top:0;width:25%;height:100%;z-index:50;cursor:pointer}
+    .nav-arrow-btn{position:absolute;top:50%;transform:translateY(-50%);
+      width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;
+      justify-content:center;cursor:pointer;transition:.3s;backdrop-filter:blur(4px);pointer-events:none}
+    #nav-left .nav-arrow-btn{left:16px}
+    #nav-right .nav-arrow-btn{right:16px}
+    #nav-left:hover .nav-arrow-btn, #nav-right:hover .nav-arrow-btn{background:rgba(255,255,255,.25);transform:translateY(-50%) scale(1.1)}
 
     /* ===== NEXT BUTTON ===== */
     .next-btn{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
@@ -313,8 +320,8 @@
 </div>
 
 <!-- Navigation zones -->
-<div id="nav-left" onclick="prevSlide()"></div>
-<div id="nav-right" onclick="nextSlide()"></div>
+<div id="nav-left" onclick="prevSlide()"><div class="nav-arrow-btn"><i data-lucide="chevron-left"></i></div></div>
+<div id="nav-right" onclick="nextSlide()"><div class="nav-arrow-btn"><i data-lucide="chevron-right"></i></div></div>
 
 <!-- ===== SLIDES ===== -->
 <div id="slides">
@@ -583,14 +590,14 @@ var CONFIG = {
   wordHint: '(5 letras)',
   wordDescription: 'O que você é para mim',
   timelineEvents: [
-    {date:'29 Nov 2025',title:'Nos conhecemos 💫',desc:'O dia em que o universo resolveu nos colocar no mesmo caminho. Tudo mudou a partir daí.',color:'#9F67FF'},
-    {date:'Dez 2025',title:'Primeira conversa de verdade ❤️',desc:'Quando percebemos que algo especial estava nascendo entre nós.',color:'#EC4899'},
-    {date:'Jan 2026',title:'Ficamos juntos 🥂',desc:'O dia mais feliz: quando você disse sim e começamos nossa história oficial.',color:'#F59E0B'},
-    {date:'Hoje',title:'Apaixonado(a) para sempre 💜',desc:'Cada dia ao seu lado é um presente que não troco por nada.',color:'#60A5FA'},
+    {date:'29 Nov 2025',title:'Nos conhecemos <i data-lucide="star" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'O dia em que o universo resolveu nos colocar no mesmo caminho. Tudo mudou a partir daí.',color:'#9F67FF'},
+    {date:'Dez 2025',title:'Primeira conversa <i data-lucide="message-circle" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'Quando percebemos que algo especial estava nascendo entre nós.',color:'#EC4899'},
+    {date:'Jan 2026',title:'Ficamos juntos <i data-lucide="heart" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'O dia mais feliz: quando você disse sim e começamos nossa história oficial.',color:'#F59E0B'},
+    {date:'Hoje',title:'Para sempre <i data-lucide="infinity" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'Cada dia ao seu lado é um presente que não troco por nada.',color:'#60A5FA'},
   ],
   achievementTitle: '5 Meses Juntos',
   achievementDesc: 'Cinco meses de amor, sorrisos e momentos únicos. Cada dia ao seu lado é um presente. Isso é apenas o começo de uma história linda!',
-  spinOptions: ['Cinema 🎬','Sushi 🍣','Parque 🌳','Restaurante 🍽️','Shopping 🛍️','Motel 🏨','Praia 🏖️','Churrasco 🥩'],
+  spinOptions: ['Cinema','Sushi','Parque','Restaurante','Shopping','Motel','Praia','Churrasco'],
   favoriteSongs: [
     { title: 'Yellow', artist: 'Coldplay', cover: 'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6' },
     { title: 'Perfect', artist: 'Ed Sheeran', cover: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef60b8b5207' },
@@ -708,7 +715,7 @@ function onSlideEnter(n) {
   if (n === 1) initUniverse();
   if (n === 3) initTimeline();
   if (n === 4) initStarMap();
-  if (n === 5 && !wgInitialized) setTimeout(initWordGame, 100);
+  if (n === 5 && !wgInitialized) initWordGame();
   if (n === 6) setTimeout(initRealMap, 120);
   if (n === 7) initSpinWheel();
   if (n === 8) initMusic();
@@ -771,7 +778,7 @@ function initUniverse() {
 // ===== TIMELINE =====
 function initTimeline() {
   var list = document.getElementById('tl-list');
-  if (list.innerHTML.trim() !== '') return;
+  if (list.children.length > 0) return;
   CONFIG.timelineEvents.forEach(function(ev, i) {
     var isLast = i === CONFIG.timelineEvents.length - 1;
     list.innerHTML += `
@@ -794,7 +801,7 @@ function initTimeline() {
 // ===== STAR MAP =====
 function initStarMap() {
   var svg = document.getElementById('star-svg');
-  if (svg.innerHTML.trim() !== '') return;
+  if (svg.children.length > 0) return;
   var W = 220, H = 220, CX = 110, CY = 110, R = 105;
   var html = '';
   // Background gradient
@@ -968,14 +975,14 @@ function submitWGGuess() {
   // Check win/lose
   if (result.every(function(r) { return r.status === 'correct'; })) {
     wgWon = true;
-    showWGMsg('Você acertou! 💜 Era ' + wgWord + '!');
+    showWGMsg('Você acertou! Era ' + wgWord + '!');
     document.getElementById('wg-celebrate').style.display = 'flex';
     document.getElementById('wg-next').style.display = 'block';
     stopProgress();
     launchConfetti();
   } else if (wgGuesses.length >= wgMaxGuesses) {
     wgLost = true;
-    showWGMsg('Era: ' + wgWord + ' 💜 Não desiste!');
+    showWGMsg('Era: ' + wgWord + ' Não desiste!');
     document.getElementById('wg-next').style.display = 'block';
   }
 }
@@ -1003,11 +1010,11 @@ function initRealMap() {
   _mapInited = true;
 
   var map = L.map('real-map', {
-    zoomControl: false,
+    zoomControl: true,
     attributionControl: false,
     dragging: true,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
+    scrollWheelZoom: true,
+    doubleClickZoom: true,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -1016,19 +1023,19 @@ function initRealMap() {
 
   // Todos os lugares da nossa jornada (extraídos do GPS das fotos)
   var lugares = [
-    {lat:-19.959134, lon:-44.327881, date:"29 Nov 2025", city:"Juatuba, MG",       emoji:"💚", label:"Nos conhecemos aqui 💚", fotos:0,  id:""},
-    {lat:-19.944165, lon:-44.01462,  date:"26 Dez 2025", city:"Belo Horizonte, MG", emoji:"💜", label:"Passeio em BH",         fotos:4,  id:"10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5"},
-    {lat:-19.958201, lon:-43.997714, date:"01 Fev 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"Momento especial em BH", fotos:1,  id:"1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK"},
-    {lat:-18.354406, lon:-43.73595,  date:"16 Fev 2026", city:"Diamantina, MG",     emoji:"🌟", label:"Viagem a Diamantina",   fotos:1,  id:"19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y"},
-    {lat:-19.880043, lon:-43.928381, date:"07 Mar 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"De volta a BH",         fotos:4,  id:"1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex"},
-    {lat:-20.011608, lon:-44.044957, date:"08 Mar 2026", city:"Ibirité, MG",        emoji:"💜", label:"Ibirité",               fotos:1,  id:"1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR"},
-    {lat:-18.349053, lon:-43.744531, date:"04 Abr 2026", city:"Gouveia, MG",        emoji:"🌟", label:"Viagem a Gouveia",      fotos:3,  id:"1ljMWyKgeLYLHFEeYp7uCRsv8YMu2RUur"},
-    {lat:-20.388459, lon:-43.506573, date:"02 Mai 2026", city:"Ouro Preto, MG",     emoji:"🌟", label:"Ouro Preto!",           fotos:8,  id:"1BVLv-g92CjoUYpVCZtVaAWMTNNoyBeMI"},
+    {lat:-19.959134, lon:-44.327881, date:"29 Nov 2025", city:"Juatuba, MG",       emoji:"heart", label:"Nos conhecemos aqui", fotos:0,  id:""},
+    {lat:-19.944165, lon:-44.01462,  date:"26 Dez 2025", city:"Belo Horizonte, MG", emoji:"camera", label:"Passeio em BH",         fotos:4,  id:"10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5"},
+    {lat:-19.958201, lon:-43.997714, date:"01 Fev 2026", city:"Belo Horizonte, MG", emoji:"star", label:"Momento especial em BH", fotos:1,  id:"1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK"},
+    {lat:-18.354406, lon:-43.73595,  date:"16 Fev 2026", city:"Diamantina, MG",     emoji:"map-pin", label:"Viagem a Diamantina",   fotos:1,  id:"19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y"},
+    {lat:-19.880043, lon:-43.928381, date:"07 Mar 2026", city:"Belo Horizonte, MG", emoji:"heart", label:"De volta a BH",         fotos:4,  id:"1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex"},
+    {lat:-20.011608, lon:-44.044957, date:"08 Mar 2026", city:"Ibirité, MG",        emoji:"camera", label:"Ibirité",               fotos:1,  id:"1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR"},
+    {lat:-18.349053, lon:-43.744531, date:"04 Abr 2026", city:"Gouveia, MG",        emoji:"map-pin", label:"Viagem a Gouveia",      fotos:3,  id:"1ljMWyKgeLYLHFEeYp7uCRsv8YMu2RUur"},
+    {lat:-20.388459, lon:-43.506573, date:"02 Mai 2026", city:"Ouro Preto, MG",     emoji:"camera", label:"Ouro Preto!",           fotos:8,  id:"1BVLv-g92CjoUYpVCZtVaAWMTNNoyBeMI"},
   ];
 
-  function mkIcon(emoji, size) {
+  function mkIcon(iconName, size) {
     return L.divIcon({
-      html: '<div style="font-size:'+size+'px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))">' + emoji + '</div>',
+      html: '<div style="font-size:'+size+'px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8));color:var(--p);fill:var(--p)"><i data-lucide="'+iconName+'" style="width:'+size+'px;height:'+size+'px"></i></div>',
       iconSize:[size,size], iconAnchor:[size/2,size], popupAnchor:[0,-size], className:'',
     });
   }
@@ -1071,6 +1078,8 @@ function initRealMap() {
   var style = document.createElement('style');
   style.textContent = '.dark-popup .leaflet-popup-content-wrapper{background:rgba(15,15,30,.92);color:#fff;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 20px rgba(0,0,0,.5)}.dark-popup .leaflet-popup-tip{background:rgba(15,15,30,.92)}.dark-popup .leaflet-popup-close-button{color:rgba(255,255,255,.5)}';
   document.head.appendChild(style);
+  
+  setTimeout(function(){ lucide.createIcons(); }, 100);
 }
 
 // ===== SPIN WHEEL =====
@@ -1155,8 +1164,9 @@ function spinWheel() {
       var effectiveAngle = (-normalAngle + Math.PI * 20) % (Math.PI * 2);
       var idx = Math.floor(effectiveAngle / slice) % CONFIG.spinOptions.length;
       var chosen = CONFIG.spinOptions[idx];
-      document.getElementById('spin-result').textContent = '🎯 ' + chosen + '!';
+      document.getElementById('spin-result').innerHTML = '<i data-lucide="target" style="display:inline-block;vertical-align:-4px"></i> ' + chosen + '!';
       document.getElementById('spin-next').style.display = 'block';
+      lucide.createIcons();
     }
   }
   requestAnimationFrame(animate);
