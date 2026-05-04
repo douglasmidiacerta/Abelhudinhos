@@ -6,6 +6,8 @@
   <title>Abelhudinhos — Para Você, com Todo Meu Amor 💜</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     :root{--p:#7C3AED;--pk:#EC4899;--gold:#F59E0B;--green:#10B981}
@@ -400,38 +402,12 @@
   <!-- SLIDE 6: MAP JOURNEY -->
   <div class="slide" id="s6">
     <div class="label">Nossa Jornada no Mapa</div>
-    <div class="map-box">
+    <div class="map-box" style="max-width:360px;width:100%">
       <div class="map-title-bar">
         <h3>Nossa Jornada no Mapa 🗺️</h3>
-        <p>Juatuba, MG — onde tudo começou</p>
+        <p>Juatuba, MG — onde tudo começou 💚</p>
       </div>
-      <div class="map-svg-wrap">
-        <svg width="100%" height="200" viewBox="0 0 340 200" style="display:block">
-          <!-- Background -->
-          <rect width="340" height="200" fill="#2a3a5a"/>
-          <!-- Water area -->
-          <rect x="0" y="130" width="340" height="70" fill="#1a3a6a" opacity=".7"/>
-          <!-- Land -->
-          <path d="M0 0 L340 0 L340 130 Q300 120 270 125 Q230 132 200 125 Q160 118 130 126 Q90 133 60 126 Q30 120 0 128 Z" fill="#3a5a3a"/>
-          <path d="M60 60 Q130 48 200 60 Q260 70 310 55 L340 80 Q310 100 270 98 Q200 95 130 98 Q80 100 60 95 Z" fill="#4a6a3a" opacity=".6"/>
-          <!-- Grid lines -->
-          <line x1="170" y1="0" x2="170" y2="200" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
-          <line x1="0" y1="100" x2="340" y2="100" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
-          <!-- Heart pins with labels -->
-          <text x="168" y="80" font-size="18" text-anchor="middle">💚</text>
-          <text x="168" y="65" font-size="8" fill="white" text-anchor="middle" opacity=".9" font-weight="600">Nos conhecemos aqui</text>
-          <text x="80" y="110" font-size="16" text-anchor="middle">💜</text>
-          <text x="80" y="126" font-size="7" fill="white" text-anchor="middle" opacity=".8">1º encontro</text>
-          <text x="280" y="70" font-size="16" text-anchor="middle">💜</text>
-          <text x="280" y="86" font-size="7" fill="white" text-anchor="middle" opacity=".8">Nossa viagem</text>
-          <text x="220" y="105" font-size="14" text-anchor="middle">💜</text>
-          <text x="220" y="120" font-size="7" fill="white" text-anchor="middle" opacity=".8">Lugar favorito</text>
-          <!-- Dashed paths between pins -->
-          <path d="M168 78 Q120 90 80 108" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-          <path d="M168 78 Q220 72 280 68" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-          <path d="M168 78 Q194 90 220 103" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-        </svg>
-      </div>
+      <div id="real-map" style="width:100%;height:270px;border-radius:0 0 20px 20px;z-index:1"></div>
     </div>
     <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
@@ -649,6 +625,7 @@ function onSlideEnter(n) {
   if (n === 3) initTimeline();
   if (n === 4) initStarMap();
   if (n === 5 && !wgInitialized) initWordGame();
+  if (n === 6) setTimeout(initRealMap, 120);
   if (n === 7) initSpinWheel();
 }
 
@@ -934,6 +911,59 @@ document.addEventListener('keydown', function(e) {
 
 // ===== SPIN WHEEL =====
 var spinInitialized = false;
+// ===== REAL MAP =====
+var _mapInited = false;
+function initRealMap() {
+  if (_mapInited) return;
+  _mapInited = true;
+
+  var LAT = -19.959134, LNG = -44.327881;
+
+  var map = L.map('real-map', {
+    center: [LAT, LNG],
+    zoom: 15,
+    zoomControl: false,
+    attributionControl: false,
+    dragging: true,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+  });
+
+  // Dark tile layer (CartoDB Dark Matter)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    subdomains: 'abcd',
+  }).addTo(map);
+
+  // Custom heart marker
+  function heartMarker(emoji, size) {
+    return L.divIcon({
+      html: '<div style="font-size:' + size + 'px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))">' + emoji + '</div>',
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size],
+      popupAnchor: [0, -size],
+      className: '',
+    });
+  }
+
+  // Main pin — onde se conheceram
+  L.marker([LAT, LNG], {icon: heartMarker('💚', 32)})
+    .addTo(map)
+    .bindPopup('<b style="font-size:13px">Nos conhecemos aqui 💚</b><br><span style="font-size:11px;color:#666">29 de novembro de 2025<br>Juatuba, MG</span>', {maxWidth: 180})
+    .openPopup();
+
+  // Legenda
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function() {
+    var d = L.DomUtil.create('div');
+    d.style.cssText = 'background:rgba(0,0,0,.65);color:#fff;padding:6px 10px;border-radius:8px;font-size:11px;backdrop-filter:blur(4px)';
+    d.innerHTML = '💚 Onde nos conhecemos';
+    return d;
+  };
+  legend.addTo(map);
+}
+
+// ===== SPIN WHEEL =====
 var spinning = false;
 var spinAngle = 0;
 
