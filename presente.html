@@ -6,12 +6,14 @@
   <title>Abelhudinhos — Para Você, com Todo Meu Amor 💜</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     :root{--p:#7C3AED;--pk:#EC4899;--gold:#F59E0B;--green:#10B981}
     html,body{height:100%;overflow:hidden;background:#0d0d1a;font-family:'Inter',sans-serif}
+    .lucide { width: 1em; height: 1em; stroke-width: 2; vertical-align: -0.125em; }
 
     /* ===== STORIES PROGRESS BAR ===== */
     #prog-bar{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -37,8 +39,16 @@
     .slide.active{opacity:1;pointer-events:auto}
 
     /* ===== NAV ZONES ===== */
-    #nav-left{position:fixed;left:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
-    #nav-right{position:fixed;right:0;top:0;width:33%;height:100%;z-index:50;cursor:pointer}
+    .nav-zone{position:fixed;top:0;width:25%;height:100%;z-index:40;cursor:pointer}
+    #nav-left{left:0}
+    #nav-right{right:0}
+    .nav-arrow-btn{position:fixed;top:50%;transform:translateY(-50%);
+      width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;
+      justify-content:center;cursor:pointer;transition:.3s;backdrop-filter:blur(4px);z-index:100;pointer-events:auto}
+    #nav-left-btn{left:16px}
+    #nav-right-btn{right:16px}
+    #nav-left-btn:hover, #nav-right-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-50%) scale(1.1)}
 
     /* ===== NEXT BUTTON ===== */
     .next-btn{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
@@ -211,7 +221,20 @@
       min-height:24px;transition:.3s}
 
     /* ============================
-       SLIDE 8 — MOON
+       SLIDE 8 — MUSIC PLAYLIST
+    ============================= */
+    #s_music{background:linear-gradient(to bottom, #1a0a33 0%, #0d0d0d 100%)}
+    .playlist-wrap{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-top:16px}
+    .track-card{display:flex;align-items:center;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 14px;gap:12px;transition:background .2s}
+    .track-card:hover{background:rgba(255,255,255,.1)}
+    .track-cover{width:48px;height:48px;border-radius:6px;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+    .track-info{flex:1;display:flex;flex-direction:column;justify-content:center}
+    .track-title{color:#fff;font-size:14px;font-weight:700;margin-bottom:2px}
+    .track-artist{color:rgba(255,255,255,.5);font-size:12px}
+    .track-play{color:var(--p);display:flex;align-items:center;justify-content:center}
+
+    /* ============================
+       SLIDE 9 — MOON
     ============================= */
     #s8{background:radial-gradient(ellipse at 30% 30%,#0a0a30,#020210)}
     .moon-scene{display:flex;flex-direction:column;align-items:center}
@@ -281,22 +304,60 @@
       0%{transform:translateY(0) rotate(0deg);opacity:1}
       100%{transform:translateY(110vh) rotate(720deg);opacity:.3}
     }
+
+    /* ===== IG FEED ===== */
+    .ig-feed { width: 100%; height: 100%; overflow-y: auto; padding-bottom: 60px; pointer-events: auto; }
+    .ig-feed::-webkit-scrollbar { display: none; }
+    .ig-post { background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+    .ig-header { display: flex; align-items: center; padding: 10px 12px; }
+    .ig-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--p); padding: 2px; }
+    .ig-user { margin-left: 10px; flex: 1; }
+    .ig-name { color: #fff; font-size: 13px; font-weight: 700; }
+    .ig-loc { color: rgba(255,255,255,.5); font-size: 11px; }
+    .ig-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .ig-actions { padding: 12px 12px 6px; display: flex; gap: 12px; }
+    .ig-actions i { color: #fff; width: 22px; height: 22px; cursor: pointer; transition: .2s; }
+    .ig-actions i.liked { color: #EC4899; fill: #EC4899; }
+    .ig-likes { padding: 0 12px; color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .ig-caption { padding: 0 12px 12px; color: rgba(255,255,255,.85); font-size: 13px; line-height: 1.4; }
+    .ig-caption b { color: #fff; font-weight: 700; }
+    
+    /* ===== FUNIL DE CONEXÃO ===== */
+    .about-scroll::-webkit-scrollbar { width: 4px; }
+    .about-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 4px; }
+    .about-level { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+    .lvl-title { background: rgba(255,255,255,.1); padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .qa-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .qa-title { font-size: 11px; color: rgba(255,255,255,.6); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .qa-row { display: flex; gap: 8px; }
+    .qa-col { flex: 1; padding: 8px; border-radius: 6px; }
+    .qa-col.ele { background: rgba(96,165,250,.1); border-left: 3px solid #60A5FA; }
+    .qa-col.ela { background: rgba(236,72,153,.1); border-left: 3px solid #EC4899; }
+    .qa-tag { font-size: 9px; font-weight: 800; margin-bottom: 4px; letter-spacing: 1px; }
+    .qa-col.ele .qa-tag { color: #60A5FA; }
+    .qa-col.ela .qa-tag { color: #EC4899; }
+    .qa-ans { color: #fff; font-size: 11px; font-weight: 500; line-height: 1.4; }
   </style>
 </head>
 <body>
+
+<!-- Áudio de Fundo -->
+<audio id="bgm" loop preload="auto" src="https://assets.mixkit.co/music/preview/mixkit-romantic-piano-122.mp3"></audio>
 
 <!-- Progress bar -->
 <div id="prog-bar"></div>
 
 <!-- Top bar -->
 <div id="top-bar">
-  <div class="top-title" id="slide-title">Abelhudinhos 💜</div>
-  <button class="sound-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
+  <div class="top-title" id="slide-title">Abelhudinhos <i data-lucide="heart" style="width:14px;color:var(--p);fill:var(--p);display:inline-block;vertical-align:middle"></i></div>
+  <button class="sound-btn" id="sound-btn" onclick="toggleSound()"><i data-lucide="volume-2" style="width:16px"></i></button>
 </div>
 
 <!-- Navigation zones -->
-<div id="nav-left" onclick="prevSlide()"></div>
-<div id="nav-right" onclick="nextSlide()"></div>
+<div id="nav-left" class="nav-zone" onclick="prevSlide()"></div>
+<div id="nav-right" class="nav-zone" onclick="nextSlide()"></div>
+<button id="nav-left-btn" class="nav-arrow-btn" onclick="prevSlide()"><i data-lucide="chevron-left"></i></button>
+<button id="nav-right-btn" class="nav-arrow-btn" onclick="nextSlide()"><i data-lucide="chevron-right"></i></button>
 
 <!-- ===== SLIDES ===== -->
 <div id="slides">
@@ -304,7 +365,7 @@
   <!-- SLIDE 0: COVER -->
   <div class="slide active" id="s0">
     <div class="cover-particles" id="particles"></div>
-    <div class="cover-emoji">💜</div>
+    <div class="cover-emoji"><i data-lucide="heart" style="width:64px;height:64px;color:var(--p);fill:var(--p)"></i></div>
     <div class="cover-names">Para <span>Você</span></div>
     <div class="cover-since">com todo meu amor • desde 29 de novembro de 2025</div>
     <div class="cover-msg">"Você é o meu lugar favorito no mundo. Essa página é nossa, para guardar cada momento especial da nossa história."</div>
@@ -317,7 +378,7 @@
     <div class="stars-bg" id="stars-bg"></div>
     <div class="label">Nosso Universo Particular</div>
     <div class="universe-text">
-      <h2>Nós dois contra o mundo 🌍</h2>
+      <h2>Nós dois contra o mundo <i data-lucide="globe" style="display:inline-block;vertical-align:middle"></i></h2>
       <p>Em cada olhar seu, encontro o universo inteiro. Você transformou a minha vida de uma forma que as palavras nunca conseguirão descrever completamente.</p>
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
@@ -326,7 +387,7 @@
         <div style="color:rgba(255,255,255,.5);font-size:11px">dias juntos</div>
       </div>
       <div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:12px;padding:10px 16px;text-align:center">
-        <div style="color:#EC4899;font-size:18px;font-weight:900">∞</div>
+        <div style="color:#EC4899;font-size:18px;font-weight:900"><i data-lucide="infinity" style="display:inline-block;vertical-align:middle"></i></div>
         <div style="color:rgba(255,255,255,.5);font-size:11px">amor</div>
       </div>
       <div style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:10px 16px;text-align:center">
@@ -338,11 +399,10 @@
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
-  <!-- SLIDE 2: PHOTO GALLERY -->
+  <!-- SLIDE 2: PHOTO GALLERY (IG FEED) -->
   <div class="slide" id="s2">
-    <div class="gallery-header">
-      <h2>Nossa Galeria 📸</h2>
-      <p>Deslize para ver nossos momentos ←→</p>
+    <div class="gallery-header" style="margin-bottom:12px">
+      <h2>Nossa Galeria <i data-lucide="instagram" style="display:inline-block;vertical-align:-4px"></i></h2>
     </div>
     <div class="polaroid-scroll">
       <div class="polaroid" style="--rot:-3deg">
@@ -421,12 +481,12 @@
   <!-- SLIDE 5: WORD GAME -->
   <div class="slide" id="s5">
     <div class="wg-title" id="wg-heading">O que mais gosto em você</div>
-    <div class="wg-hint">Descubra a palavra secreta (5 letras)</div>
+    <div class="wg-hint" id="wg-hint">Descubra a palavra secreta (5 letras)</div>
     <div class="wg-msg" id="wg-msg"></div>
     <div class="wg-grid" id="wg-grid"></div>
     <div id="wg-keyboard"></div>
-    <div class="wg-celebrate" id="wg-celebrate" style="display:none">🎉💜🎉</div>
-    <button class="next-btn" id="wg-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <div class="wg-celebrate" id="wg-celebrate" style="display:none;gap:10px;justify-content:center"><i data-lucide="party-popper" style="color:#EC4899"></i><i data-lucide="heart" style="color:var(--p);fill:var(--p);margin:0 8px"></i><i data-lucide="party-popper" style="color:#EC4899"></i></div>
+    <button class="next-btn" id="wg-next" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
@@ -435,8 +495,8 @@
     <div class="label">Nossa Jornada no Mapa</div>
     <div class="map-box" style="max-width:360px;width:100%">
       <div class="map-title-bar">
-        <h3>Nossa Jornada no Mapa 🗺️</h3>
-        <p>Juatuba, MG — onde tudo começou 💚</p>
+        <h3>Nossa Jornada no Mapa <i data-lucide="map" style="display:inline-block;vertical-align:-4px"></i></h3>
+        <p>Juatuba, MG — onde tudo começou <i data-lucide="heart" style="width:12px;color:var(--green);fill:var(--green);display:inline-block;vertical-align:-2px"></i></p>
       </div>
       <div id="real-map" style="width:100%;height:270px;border-radius:0 0 20px 20px;z-index:1"></div>
     </div>
@@ -447,24 +507,176 @@
   <!-- SLIDE 7: SPIN WHEEL -->
   <div class="slide" id="s7">
     <div class="spin-wrap">
-      <div class="spin-title-h">Para onde vamos<br>sair Hoje? 🎡</div>
+      <div class="spin-title-h">Para onde vamos<br>sair Hoje? <i data-lucide="compass" style="display:inline-block;vertical-align:-4px"></i></div>
       <div class="wheel-container">
         <div class="wheel-arrow">▼</div>
         <canvas id="wheel-canvas" width="220" height="220"></canvas>
-        <div class="wheel-center">❤️</div>
+        <div class="wheel-center"><i data-lucide="heart" style="color:var(--pk);fill:var(--pk);width:16px;height:16px"></i></div>
       </div>
       <div class="spin-result" id="spin-result"></div>
-      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">Girar Roleta 🎲</button>
+      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">Girar Roleta <i data-lucide="dices" style="width:18px;display:inline-block;vertical-align:-4px"></i></button>
     </div>
-    <button class="next-btn" id="spin-next" onclick="nextSlide()" style="display:none">Próxima Seção →</button>
+    <button class="next-btn" id="spin-next" onclick="nextSlide()">Próxima Seção →</button>
     <div class="watermark">abelhudinhos.com.br — Privado</div>
   </div>
 
-  <!-- SLIDE 8: MOON CURIOSITY -->
+  <!-- SLIDE 8: MUSIC PLAYLIST -->
+  <div class="slide" id="s_music">
+    <div class="label">Nossa Trilha Sonora</div>
+    <div class="big-title" style="font-size:22px;margin-bottom:4px">Músicas Favoritas <i data-lucide="music" style="display:inline-block;vertical-align:-2px"></i></div>
+    <p class="subtitle" style="margin-bottom:8px">As canções que embalam a nossa história.</p>
+    <div class="playlist-wrap" id="playlist-wrap">
+      <!-- JS vai preencher -->
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 8: O QUE UM DEVE SABER -->
+  <div class="slide" id="s_about">
+    <div class="about-wrapper" style="width:100%;height:100%;display:flex;flex-direction:column;padding-top:20px">
+      <div class="label" style="margin-bottom:4px">Funil de Conexão</div>
+      <div class="big-title" style="font-size:20px;margin-bottom:12px;line-height:1.2">O Que Devemos Saber<br>Um Sobre o Outro</div>
+      
+      <div class="about-scroll" style="flex:1;overflow-y:auto;padding-right:4px;padding-bottom:40px;display:flex;flex-direction:column;pointer-events:auto">
+        
+        <!-- NÍVEL 1 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="info" style="color:var(--p)"></i> Nível 1: Curiosidades Básicas</div>
+          
+          <div class="qa-card"><div class="qa-title">🎨 Cor Favorita</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Azul Bebê</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Lilás</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍝 Comida Favorita</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Strogonoff, Torta de Frango</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Strogonoff</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🤢 Não come de jeito nenhum</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Jiló, dobradinha, pequi</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Chorizo e pé de moleque</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍹 Bebidas</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Limoneto, Sprite, Beats</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Vitamina de amora, Vinho seco</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🍰 Sobremesa</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Bolo de cenoura com chocolate</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Brigadeiro de colher, Broa</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">📺 Filmes e Séries</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Sem limite, Friends, Um maluco no pedaço, The Big Bang Theory</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">The Big Bang Theory, You, Brighton, A Cabana</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎵 Música</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Trap, Filipe Ret, Henrique e Juliano</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Jorge e Matheus, Menos é Mais, Almir Sater, Daniel</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎮 Hobbies</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Dirigir</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Treinar, pedalar, ir ao shopping</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👕 Tamanhos (Calçado/Calça/Blusa)</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">40 / 41 / G</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">36 / 38 / M</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🎁 Flores e Presentes</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Experiências</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Rosas, Presentes úteis</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">✈️ Lugar dos Sonhos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Lençóis Maranhenses, Grécia, Monaco</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Itália, Maceió, Caribe</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🤪 Mania ou Tique</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Expressivo</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Limpeza</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👻 Fobia ou Medo</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Medo de Vaca e Galinha</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Elevador, lugar fechado e o mar</div></div>
+          </div></div>
+        </div>
+
+        <!-- NÍVEL 2 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="coffee" style="color:var(--gold)"></i> Nível 2: Rotina e Convivência</div>
+          
+          <div class="qa-card"><div class="qa-title">🔋 Padrões de Energia</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Matutina</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Matutina</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🌅 Humor Matinal</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Acorda conversando</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Precisa de silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">😴 Lidando com o Cansaço</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Silêncio</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🌤️ Clima Ideal</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Praia, Piscina e Sol</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Praia, Piscina e Sol</div></div>
+          </div></div>
+        </div>
+
+        <!-- NÍVEL 3 -->
+        <div class="about-level">
+          <div class="lvl-title"><i data-lucide="shield" style="color:var(--green)"></i> Nível 3: Valores e Futuro</div>
+          
+          <div class="qa-card"><div class="qa-title">💰 Perfil Financeiro</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Focado no amanhã</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Focado no amanhã</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">📝 Organização</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Anota tudo</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Anota tudo</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🏠 Objetivos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Por enquanto alugar um imóvel</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Por enquanto alugar um imóvel</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👶 Filhos</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Sim, 1 menino</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Sim, 1 menino</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">👨‍👩‍👧 Família</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Bem próximos</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Bem próximos</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🔭 Visão de Futuro (10 anos)</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Em cidades do Brasil, em viagens</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Em Belo Horizonte</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">💖 Como se sentem amados</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Toque físico</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Tempo de qualidade</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">⚠️ Gatilhos Emocionais</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Mentira</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Gritar</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🥊 Estilo de Briga</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Resolver na hora</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Ficar em silêncio</div></div>
+          </div></div>
+          <div class="qa-card"><div class="qa-title">🕊️ Como pedir desculpas</div><div class="qa-row">
+            <div class="qa-col ele"><div class="qa-tag">ELE</div><div class="qa-ans">Não errar novamente</div></div>
+            <div class="qa-col ela"><div class="qa-tag">ELA</div><div class="qa-ans">Carinho e cuidado</div></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">Próxima Seção →</button>
+    <div class="watermark">abelhudinhos.com.br — Privado</div>
+  </div>
+
+  <!-- SLIDE 9: MOON CURIOSITY -->
   <div class="slide" id="s8">
     <div class="moon-scene">
       <div class="label">Curiosidades</div>
-      <div class="big-title" style="font-size:18px;max-width:280px">Nos conhecemos sob<br>o brilho da lua 🌙</div>
+      <div class="big-title" style="font-size:18px;max-width:280px">Nos conhecemos sob<br>o brilho da lua <i data-lucide="moon" style="display:inline-block;vertical-align:-4px"></i></div>
       <div class="moon-svg-wrap">
         <svg width="140" height="140" viewBox="0 0 140 140">
           <defs>
@@ -491,7 +703,7 @@
         </svg>
       </div>
       <div class="moon-fact">
-        <h3>Lua Minguante 🌗</h3>
+        <h3>Lua Minguante <i data-lucide="moon" style="display:inline-block;vertical-align:-2px;width:14px"></i></h3>
         <p>Na noite de 29 de Novembro de 2025, em Juatuba, MG, o céu guardava um segredo: duas pessoas prestes a mudar a vida uma da outra para sempre.</p>
       </div>
     </div>
@@ -507,9 +719,9 @@
         <div class="ach-brand">✦ ABELHUDINHOS WRAPPED</div>
         <div class="ach-stars">★★★★★</div>
       </div>
-      <div class="ach-photo">💑</div>
+      <div class="ach-photo"><i data-lucide="users" style="width:40px;height:40px;color:#F59E0B"></i></div>
       <div class="ach-name-row">
-        <div class="ach-crown">👑</div>
+        <div class="ach-crown"><i data-lucide="crown" style="color:#F59E0B;width:16px;height:16px"></i></div>
         <div class="ach-name" id="ach-time-title">1 Ano Juntos</div>
       </div>
       <div class="ach-days" id="ach-days-text">365 DIAS JUNTOS</div>
@@ -527,7 +739,7 @@
   <!-- SLIDE 10: FINAL LETTER -->
   <div class="slide" id="s10">
     <div class="letter-wrap">
-      <div class="letter-emoji">💜</div>
+      <div class="letter-emoji"><i data-lucide="heart" style="width:48px;height:48px;color:var(--p);fill:var(--p)"></i></div>
       <div class="letter-to">Para</div>
       <div class="letter-name">Meu Grande Amor</div>
       <div class="letter-text">
@@ -536,7 +748,7 @@
       <div class="letter-from">Com todo meu amor,</div>
       <div class="letter-sig">Seu Amor 💜</div>
       <div class="letter-hearts">💜💜💜</div>
-      <button class="share-btn" onclick="sharePresente()">Compartilhar este presente 🎁</button>
+      <button class="share-btn" onclick="sharePresente()">Compartilhar este presente <i data-lucide="gift" style="width:16px;display:inline-block;vertical-align:-4px"></i></button>
     </div>
     <div class="watermark" style="bottom:16px">abelhudinhos.com.br — Privado</div>
   </div>
@@ -553,18 +765,24 @@ var CONFIG = {
   wordHint: '(5 letras)',
   wordDescription: 'O que você é para mim',
   timelineEvents: [
-    {date:'29 Nov 2025',title:'Nos conhecemos 💫',desc:'O dia em que o universo resolveu nos colocar no mesmo caminho. Tudo mudou a partir daí.',color:'#9F67FF'},
-    {date:'Dez 2025',title:'Primeira conversa de verdade ❤️',desc:'Quando percebemos que algo especial estava nascendo entre nós.',color:'#EC4899'},
-    {date:'Jan 2026',title:'Ficamos juntos 🥂',desc:'O dia mais feliz: quando você disse sim e começamos nossa história oficial.',color:'#F59E0B'},
-    {date:'Hoje',title:'Apaixonado(a) para sempre 💜',desc:'Cada dia ao seu lado é um presente que não troco por nada.',color:'#60A5FA'},
+    {date:'29 Nov 2025',title:'Nos conhecemos <i data-lucide="star" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'O dia em que o universo resolveu nos colocar no mesmo caminho. Tudo mudou a partir daí.',color:'#9F67FF'},
+    {date:'Dez 2025',title:'Primeira conversa <i data-lucide="message-circle" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'Quando percebemos que algo especial estava nascendo entre nós.',color:'#EC4899'},
+    {date:'Jan 2026',title:'Ficamos juntos <i data-lucide="heart" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'O dia mais feliz: quando você disse sim e começamos nossa história oficial.',color:'#F59E0B'},
+    {date:'Hoje',title:'Para sempre <i data-lucide="infinity" style="display:inline-block;vertical-align:-2px;width:16px"></i>',desc:'Cada dia ao seu lado é um presente que não troco por nada.',color:'#60A5FA'},
   ],
   achievementTitle: '5 Meses Juntos',
   achievementDesc: 'Cinco meses de amor, sorrisos e momentos únicos. Cada dia ao seu lado é um presente. Isso é apenas o começo de uma história linda!',
-  spinOptions: ['Cinema 🎬','Sushi 🍣','Parque 🌳','Restaurante 🍽️','Shopping 🛍️','Motel 🏨','Praia 🏖️','Churrasco 🥩'],
+  spinOptions: ['Cinema','Sushi','Parque','Restaurante','Shopping','Motel','Praia','Churrasco'],
+  favoriteSongs: [
+    { trackId: '1zB4vmk8tFRmM9UHI8vfNq' }, // Eu te escolheria todo dia (ou similar)
+    { trackId: '3AJwUDP919kvQ9QcozQPxg' }, // Yellow - Coldplay
+    { trackId: '0tgVpDi06FyKpA1z0VMD4v' }, // Perfect - Ed Sheeran
+    { trackId: '3U4isOIWM3VvDubwSI3y7a' }  // All of Me - John Legend
+  ]
 };
 
 // ===== SLIDES =====
-var TOTAL = 11;
+var TOTAL = 13;
 var cur = 0;
 var muted = false;
 var progressTimer = null;
@@ -611,8 +829,8 @@ function startProgress() {
     updateProgBar();
     if (progressElapsed >= SLIDE_DURATION) {
       stopProgress();
-      // Auto-advance only for non-interactive slides
-      if (cur !== 5 && cur !== 7) nextSlide();
+      // Auto-advance only for non-interactive slides (2=Gallery, 5=WordGame, 6=Map, 7=Wheel, 9=About)
+      if (cur !== 2 && cur !== 5 && cur !== 6 && cur !== 7 && cur !== 9) nextSlide();
     }
   }, TICK);
 }
@@ -630,6 +848,11 @@ function goSlide(n) {
   updateTopBar();
   startProgress();
   onSlideEnter(cur);
+  
+  // Disable nav zones on interactive slides to allow internal clicks
+  var isInteractive = (cur === 2 || cur === 5 || cur === 6 || cur === 7 || cur === 8 || cur === 9);
+  document.getElementById('nav-left').style.pointerEvents = isInteractive ? 'none' : 'auto';
+  document.getElementById('nav-right').style.pointerEvents = isInteractive ? 'none' : 'auto';
 }
 
 function nextSlide() { if (cur < TOTAL - 1) goSlide(cur + 1); }
@@ -638,19 +861,71 @@ function prevSlide() { if (cur > 0) goSlide(cur - 1); }
 var titles = [
   'Abelhudinhos 💜','Nosso Universo','Nossa Galeria','Nossa Jornada',
   'Mapa das Estrelas','Jogo de Palavras','Jornada no Mapa',
-  'Roleta Surpresa','Curiosidades','Conquistas','Carta Final'
+  'Roleta Surpresa','Nossas Músicas','Sobre Nós','Curiosidades','Conquistas','Carta Final'
 ];
 function updateTopBar() {
   document.getElementById('slide-title').textContent = titles[cur] || 'Abelhudinhos';
 }
 
+var audioStarted = false;
 function toggleSound() {
   muted = !muted;
-  document.getElementById('sound-btn').textContent = muted ? '🔇' : '🔊';
+  var audio = document.getElementById('bgm');
+  if (muted) {
+    audio.pause();
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-x" style="width:16px"></i>';
+  } else {
+    audio.play().catch(function(){});
+    document.getElementById('sound-btn').innerHTML = '<i data-lucide="volume-2" style="width:16px"></i>';
+  }
+  lucide.createIcons();
 }
 
 // ===== SLIDE ENTER ACTIONS =====
+// ===== IG FEED INIT =====
+var igPhotos = [
+  {src:'https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400', caption:'26 Dez 2025 💜', loc:'Juatuba, MG'},
+  {src:'https://lh3.googleusercontent.com/d/1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK=w400', caption:'01 Fev 2026 🥰', loc:'Nosso Cantinho'},
+  {src:'https://lh3.googleusercontent.com/d/19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y=w400', caption:'16 Fev 2026 ❤️', loc:'Passeio Perfeito'},
+  {src:'https://lh3.googleusercontent.com/d/1GII0E3YvZ4xBiyr8r0Lz9KnZ8JK25j9y=w400', caption:'24 Abr 2026 ✨', loc:'Comemorando'},
+  {src:'https://lh3.googleusercontent.com/d/1tR_Tqq0w7Qm1G3_ir8Na8NtwDISIFw6f=w400', caption:'24 Abr 2026 💕', loc:'Comemorando'},
+  {src:'https://lh3.googleusercontent.com/d/1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex=w400', caption:'Nossos momentos 🌟', loc:'Pelo Mundo'},
+  {src:'https://lh3.googleusercontent.com/d/1iHGu8VUeyxJXXY7MIwhsGUkU-7L_0DdN=w400', caption:'Sempre juntos 💜', loc:'Nosso Lar'},
+  {src:'https://lh3.googleusercontent.com/d/184VaW72OlVCx80hzBXeza5kqpdI9xpN6=w400', caption:'Nossa história 🥰', loc:'Lembranças'},
+  {src:'https://lh3.googleusercontent.com/d/1r5OpBxYWQx1SEGAvRQRYQFgI3P64SeQU=w400', caption:'Momentos lindos 💫', loc:'Viagem'},
+  {src:'https://lh3.googleusercontent.com/d/1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR=w400', caption:'Com você 💜', loc:'Noite Especial'}
+];
+function initIgFeed() {
+  var feed = document.getElementById('ig-feed');
+  if(!feed || feed.children.length > 0) return;
+  var html = '';
+  igPhotos.forEach(function(p, i) {
+    html += '<div class="ig-post">' +
+      '<div class="ig-header">' +
+        '<img src="https://lh3.googleusercontent.com/d/10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5=w400" class="ig-avatar">' +
+        '<div class="ig-user"><div class="ig-name">abelhudinhos</div><div class="ig-loc">'+p.loc+'</div></div>' +
+        '<i data-lucide="more-horizontal" style="color:#fff"></i>' +
+      '</div>' +
+      '<img class="ig-img" src="'+p.src+'" loading="lazy">' +
+      '<div class="ig-actions">' +
+        '<i data-lucide="heart" class="liked"></i>' +
+        '<i data-lucide="message-circle"></i>' +
+        '<i data-lucide="send"></i>' +
+      '</div>' +
+      '<div class="ig-likes">Curtido por você e milhares de pessoas</div>' +
+      '<div class="ig-caption"><b>abelhudinhos</b> '+p.caption+'</div>' +
+    '</div>';
+  });
+  feed.innerHTML = html;
+  lucide.createIcons();
+}
+
 function onSlideEnter(n) {
+  if (n === 2) { initIgFeed(); }
+  if (n === 1 && !muted && !audioStarted) {
+    audioStarted = true;
+    document.getElementById('bgm').play().catch(function(){});
+  }
   if (n === 0) initCover();
   if (n === 1) initUniverse();
   if (n === 3) initTimeline();
@@ -658,6 +933,7 @@ function onSlideEnter(n) {
   if (n === 5 && !wgInitialized) initWordGame();
   if (n === 6) setTimeout(initRealMap, 120);
   if (n === 7) initSpinWheel();
+  if (n === 8) initMusic();
 }
 
 // ===== COVER =====
@@ -717,7 +993,7 @@ function initUniverse() {
 // ===== TIMELINE =====
 function initTimeline() {
   var list = document.getElementById('tl-list');
-  if (list.innerHTML.trim() !== '') return;
+  if (list.children.length > 0) return;
   CONFIG.timelineEvents.forEach(function(ev, i) {
     var isLast = i === CONFIG.timelineEvents.length - 1;
     list.innerHTML += `
@@ -740,7 +1016,7 @@ function initTimeline() {
 // ===== STAR MAP =====
 function initStarMap() {
   var svg = document.getElementById('star-svg');
-  if (svg.innerHTML.trim() !== '') return;
+  if (svg.children.length > 0) return;
   var W = 220, H = 220, CX = 110, CY = 110, R = 105;
   var html = '';
   // Background gradient
@@ -801,12 +1077,12 @@ var wgLost = false;
 var wgKeyStatus = {};
 
 function initWordGame() {
-  wgInitialized = true;
-  wgWord = CONFIG.secretWord.toUpperCase();
+  wgWord = CONFIG.secretWord.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   document.getElementById('wg-heading').textContent = CONFIG.wordDescription;
   document.getElementById('wg-hint').textContent = CONFIG.wordHint;
   renderWGGrid();
   renderWGKeyboard();
+  wgInitialized = true;
 }
 
 function renderWGGrid() {
@@ -914,14 +1190,14 @@ function submitWGGuess() {
   // Check win/lose
   if (result.every(function(r) { return r.status === 'correct'; })) {
     wgWon = true;
-    showWGMsg('Você acertou! 💜 Era ' + wgWord + '!');
-    document.getElementById('wg-celebrate').style.display = 'block';
+    showWGMsg('Você acertou! Era ' + wgWord + '!');
+    document.getElementById('wg-celebrate').style.display = 'flex';
     document.getElementById('wg-next').style.display = 'block';
     stopProgress();
     launchConfetti();
   } else if (wgGuesses.length >= wgMaxGuesses) {
     wgLost = true;
-    showWGMsg('Era: ' + wgWord + ' 💜 Não desiste!');
+    showWGMsg('Era: ' + wgWord + ' Não desiste!');
     document.getElementById('wg-next').style.display = 'block';
   }
 }
@@ -949,11 +1225,11 @@ function initRealMap() {
   _mapInited = true;
 
   var map = L.map('real-map', {
-    zoomControl: false,
+    zoomControl: true,
     attributionControl: false,
     dragging: true,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
+    scrollWheelZoom: true,
+    doubleClickZoom: true,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -962,19 +1238,19 @@ function initRealMap() {
 
   // Todos os lugares da nossa jornada (extraídos do GPS das fotos)
   var lugares = [
-    {lat:-19.959134, lon:-44.327881, date:"29 Nov 2025", city:"Juatuba, MG",       emoji:"💚", label:"Nos conhecemos aqui 💚", fotos:0,  id:""},
-    {lat:-19.944165, lon:-44.01462,  date:"26 Dez 2025", city:"Belo Horizonte, MG", emoji:"💜", label:"Passeio em BH",         fotos:4,  id:"10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5"},
-    {lat:-19.958201, lon:-43.997714, date:"01 Fev 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"Momento especial em BH", fotos:1,  id:"1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK"},
-    {lat:-18.354406, lon:-43.73595,  date:"16 Fev 2026", city:"Diamantina, MG",     emoji:"🌟", label:"Viagem a Diamantina",   fotos:1,  id:"19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y"},
-    {lat:-19.880043, lon:-43.928381, date:"07 Mar 2026", city:"Belo Horizonte, MG", emoji:"💜", label:"De volta a BH",         fotos:4,  id:"1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex"},
-    {lat:-20.011608, lon:-44.044957, date:"08 Mar 2026", city:"Ibirité, MG",        emoji:"💜", label:"Ibirité",               fotos:1,  id:"1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR"},
-    {lat:-18.349053, lon:-43.744531, date:"04 Abr 2026", city:"Gouveia, MG",        emoji:"🌟", label:"Viagem a Gouveia",      fotos:3,  id:"1ljMWyKgeLYLHFEeYp7uCRsv8YMu2RUur"},
-    {lat:-20.388459, lon:-43.506573, date:"02 Mai 2026", city:"Ouro Preto, MG",     emoji:"🌟", label:"Ouro Preto!",           fotos:8,  id:"1BVLv-g92CjoUYpVCZtVaAWMTNNoyBeMI"},
+    {lat:-19.959134, lon:-44.327881, date:"29 Nov 2025", city:"Juatuba, MG",       emoji:"heart", label:"Nos conhecemos aqui", fotos:0,  id:""},
+    {lat:-19.944165, lon:-44.01462,  date:"26 Dez 2025", city:"Belo Horizonte, MG", emoji:"camera", label:"Passeio em BH",         fotos:4,  id:"10dIbhmB9f4TTU3ePgxezQ6xCycjQUiB5"},
+    {lat:-19.958201, lon:-43.997714, date:"01 Fev 2026", city:"Belo Horizonte, MG", emoji:"star", label:"Momento especial em BH", fotos:1,  id:"1nGLvnj_XbVqEUB3zu7J5ZXU_Ogf6eKPK"},
+    {lat:-18.354406, lon:-43.73595,  date:"16 Fev 2026", city:"Diamantina, MG",     emoji:"map-pin", label:"Viagem a Diamantina",   fotos:1,  id:"19A-f8hVQnamqSdK9bopUgnvMd8z58V1Y"},
+    {lat:-19.880043, lon:-43.928381, date:"07 Mar 2026", city:"Belo Horizonte, MG", emoji:"heart", label:"De volta a BH",         fotos:4,  id:"1lgL1C6KSm2gfyExVjD0o56CXqcrUTzex"},
+    {lat:-20.011608, lon:-44.044957, date:"08 Mar 2026", city:"Ibirité, MG",        emoji:"camera", label:"Ibirité",               fotos:1,  id:"1FpQWR0ir4cS8-ofD5uDpSQfRSfcepibR"},
+    {lat:-18.349053, lon:-43.744531, date:"04 Abr 2026", city:"Gouveia, MG",        emoji:"map-pin", label:"Viagem a Gouveia",      fotos:3,  id:"1ljMWyKgeLYLHFEeYp7uCRsv8YMu2RUur"},
+    {lat:-20.388459, lon:-43.506573, date:"02 Mai 2026", city:"Ouro Preto, MG",     emoji:"camera", label:"Ouro Preto!",           fotos:8,  id:"1BVLv-g92CjoUYpVCZtVaAWMTNNoyBeMI"},
   ];
 
-  function mkIcon(emoji, size) {
+  function mkIcon(iconName, size) {
     return L.divIcon({
-      html: '<div style="font-size:'+size+'px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))">' + emoji + '</div>',
+      html: '<div style="font-size:'+size+'px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8));color:var(--p);fill:var(--p)"><i data-lucide="'+iconName+'" style="width:'+size+'px;height:'+size+'px"></i></div>',
       iconSize:[size,size], iconAnchor:[size/2,size], popupAnchor:[0,-size], className:'',
     });
   }
@@ -1017,6 +1293,8 @@ function initRealMap() {
   var style = document.createElement('style');
   style.textContent = '.dark-popup .leaflet-popup-content-wrapper{background:rgba(15,15,30,.92);color:#fff;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 20px rgba(0,0,0,.5)}.dark-popup .leaflet-popup-tip{background:rgba(15,15,30,.92)}.dark-popup .leaflet-popup-close-button{color:rgba(255,255,255,.5)}';
   document.head.appendChild(style);
+  
+  setTimeout(function(){ lucide.createIcons(); }, 100);
 }
 
 // ===== SPIN WHEEL =====
@@ -1095,18 +1373,28 @@ function spinWheel() {
     } else {
       spinning = false;
       document.getElementById('spin-btn').disabled = false;
-      // Determine result: arrow points up (angle = -PI/2 from top)
-      var normalAngle = ((spinAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+      // Determine result: arrow points up
+      var normalAngle = spinAngle % (Math.PI * 2);
       var slice = (Math.PI * 2) / CONFIG.spinOptions.length;
-      // Arrow at top = -PI/2, convert to which slice
-      var arrowAngle = (Math.PI / 2 - normalAngle + Math.PI * 4) % (Math.PI * 2);
-      var idx = Math.floor(arrowAngle / slice) % CONFIG.spinOptions.length;
+      var effectiveAngle = (-normalAngle + Math.PI * 20) % (Math.PI * 2);
+      var idx = Math.floor(effectiveAngle / slice) % CONFIG.spinOptions.length;
       var chosen = CONFIG.spinOptions[idx];
-      document.getElementById('spin-result').textContent = '🎯 ' + chosen + '!';
+      document.getElementById('spin-result').innerHTML = '<i data-lucide="target" style="display:inline-block;vertical-align:-4px"></i> ' + chosen + '!';
       document.getElementById('spin-next').style.display = 'block';
+      lucide.createIcons();
     }
   }
   requestAnimationFrame(animate);
+}
+
+// ===== MUSIC PLAYLIST =====
+function initMusic() {
+  var wrap = document.getElementById('playlist-wrap');
+  if (wrap.children.length > 0) return;
+  
+  CONFIG.favoriteSongs.forEach(function(song) {
+    wrap.innerHTML += '<iframe style="border-radius:12px;margin-bottom:12px" src="https://open.spotify.com/embed/track/' + song.trackId + '?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+  });
 }
 
 // ===== ACHIEVEMENTS =====
@@ -1163,6 +1451,8 @@ buildProgBar();
 updateTopBar();
 initCover();
 startProgress();
+lucide.createIcons();
 </script>
 </body>
 </html>
+<!-- Deploy for�ado em: 2026-05-04 00:30:58 -->
